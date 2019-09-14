@@ -1178,25 +1178,25 @@ std::vector<Eigen::Vector2i> TriangleMesh::GetNonManifoldEdges(
 std::vector<Eigen::RowVector2i> TriangleMesh::IdenticallyColoredConnectedComponents() 
         const {
     std::shared_ptr<TriangleMesh> mesh = std::make_shared<TriangleMesh>();
-    mesh->vertices_.resize(vertices_.size());
-    mesh->vertex_colors_.resize(vertex_colors_.size());
-    mesh->adjacency_list_ = adjacency_list_;
+    mesh->vertices_.resize(vertices_.size());                        // vertex indices
+    mesh->vertex_colors_.resize(vertex_colors_.size());              //vertex colors
+    mesh->adjacency_list_ = adjacency_list_;                         // relation between vertices that share an edge
     if (!mesh->HasAdjacencyList()) {
-        mesh->ComputeAdjacencyList();
+        mesh->ComputeAdjacencyList();                                // Getting the adjacency list
     }
     std::vector<Eigen::RowVector2i> connected_edges;
     for(size_t vidx = 0; vidx < mesh->vertices_.size(); ++vidx){
-        if (mesh->adjacency_list_.empty()){
-            connected_edges.push_back(Eigen::RowVectorXi(vidx));
+        int ind = connected_edges.size() -1;
+        int end = vidx - 1;
+        if ((vidx > 0) && connected_edges[ind].x() != end){          // for adding vertices with no identically colored components
+            connected_edges.push_back(Eigen::RowVectorXi(vidx));     
         }
-        else {
-            for (int nbidx : mesh->adjacency_list_[vidx]){
-                if ((mesh->vertex_colors_[vidx] == mesh->vertex_colors_[nbidx]) && (int(vidx) < nbidx)){
-                    connected_edges.push_back(Eigen::RowVector2i(vidx, nbidx));
-                    }
+        for (int nbidx : mesh->adjacency_list_[vidx]){               // adding identically colored components for present vertex
+            if ((mesh->vertex_colors_[vidx] == mesh->vertex_colors_[nbidx]) && (int(vidx) < nbidx)){
+                connected_edges.push_back(Eigen::RowVector2i(vidx, nbidx));
+                }
             }
         }
-    }
     return connected_edges;
 }
 
