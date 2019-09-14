@@ -1,0 +1,650 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Compiling from source &mdash; Open3D latest (cf20af6) documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/open3d_logo.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Building Documentation" href="builddocs.html" />
+    <link rel="prev" title="Getting Started" href="getting_started.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Open3D
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest (cf20af6)
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">About Open3D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Compiling from source</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ubuntu">Ubuntu</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-dependencies-optional">1. Install dependencies (optional)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setup-python-binding-environments">2. Setup Python binding environments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#select-the-right-python-executable">2.1 Select the right Python executable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#jupyter-visualization-widgets-support-experimental">2.2 Jupyter visualization widgets support (experimental)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#disable-python-binding">2.3 Disable Python binding</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#config">3. Config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#build">4. Build</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install">5. Install</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#install-open3d-python-package">5.1 Install Open3D Python package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-open3d-as-a-c-library">5.2 Install Open3D as a C++ library</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#macos">MacOS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">1. Install dependencies (optional)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">2. Setup Python binding environments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">3. Config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">4. Build</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">5. Install</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#windows">Windows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dependencies">1. Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">2. Setup Python binding environments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#config-generate-visual-studio-solution">3. Config (generate Visual Studio solution)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">4. Build</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">5. Install</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sanity-check">Sanity check</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compilation-options">Compilation Options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#compilation-options-dependencies">Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#openmp">OpenMP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#unit-test">Unit test</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="builddocs.html">Building Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribute.html">Contributing to Open3D</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorial</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/Basic/index.html">Basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/Advanced/index.html">Advanced</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/ReconstructionSystem/index.html">Reconstruction system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/C++/cplusplus_interface.html">C++ interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/docker/index.html">Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/reference.html">Reference</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="python_api/open3d.camera.html">open3d.camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_api/open3d.color_map.html">open3d.color_map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_api/open3d.geometry.html">open3d.geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_api/open3d.io.html">open3d.io</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_api/open3d.integration.html">open3d.integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_api/open3d.odometry.html">open3d.odometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_api/open3d.registration.html">open3d.registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_api/open3d.utility.html">open3d.utility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_api/open3d.visualization.html">open3d.visualization</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Open3D</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Compiling from source</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="compiling-from-source">
+<span id="compilation"></span><h1>Compiling from source<a class="headerlink" href="#compiling-from-source" title="Permalink to this headline">¶</a></h1>
+<p>You may want to build Open3D from source if you are developing Open3D, want to
+get the latest features in the <code class="docutils literal notranslate"><span class="pre">master</span></code> branch, or if the OS or Python
+versions are not covered by Open3D’s pre-built Python packages from PyPI and
+Conda.</p>
+<p>The basic tools needed are <a class="reference external" href="https://git-scm.com/">git</a>,
+<a class="reference external" href="https://cmake.org/">CMake</a>, and <strong>a non-ancient C++ compiler</strong> that supports
+C++11, such as gcc 4.8+, Visual Studio 2015 update 3+, or XCode 8.0+. If Python
+binding is needed, make sure Python 2.7 or 3.5+ is installed.</p>
+<p>Download source code from the <a class="reference external" href="https://github.com/intel-isl/Open3D">repository</a>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone --recursive https://github.com/intel-isl/Open3D
+</pre></div>
+</div>
+<div class="section" id="ubuntu">
+<span id="compilation-ubuntu"></span><h2>Ubuntu<a class="headerlink" href="#ubuntu" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="install-dependencies-optional">
+<span id="compilation-ubuntu-dependencies"></span><h3>1. Install dependencies (optional)<a class="headerlink" href="#install-dependencies-optional" title="Permalink to this headline">¶</a></h3>
+<p>Optionally, dependencies can be installed prior to building Open3D to reduce
+compilation time. Otherwise, the dependencies can also be build from source, see
+<a class="reference internal" href="#compilation-options-dependencies"><span class="std std-ref">Dependencies</span></a>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>util/scripts/install-deps-ubuntu.sh
+</pre></div>
+</div>
+</div>
+<div class="section" id="setup-python-binding-environments">
+<span id="compilation-ubuntu-python-binding"></span><h3>2. Setup Python binding environments<a class="headerlink" href="#setup-python-binding-environments" title="Permalink to this headline">¶</a></h3>
+<p>This step is only required Python support for Open3D is needed.
+We use <a class="reference external" href="https://github.com/pybind/pybind11">pybind11</a> for the Python
+binding. Please refer to
+<a class="reference external" href="http://pybind11.readthedocs.io/en/stable/faq.html">pybind11 document page</a>
+when running into Python binding issues.</p>
+<div class="section" id="select-the-right-python-executable">
+<h4>2.1 Select the right Python executable<a class="headerlink" href="#select-the-right-python-executable" title="Permalink to this headline">¶</a></h4>
+<p>All we need to do in this step is to ensure that the default Python in the
+current <code class="docutils literal notranslate"><span class="pre">PATH</span></code> is the desired one. Specifically,</p>
+<ul class="simple">
+<li><p>For pip virtualenv, activate it by <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">path_to_my_env/bin/activate</span></code>.</p></li>
+<li><p>For Conda virtualenv, activate it by <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">my_env</span></code>.</p></li>
+<li><p>For the system’s default Python (note: <code class="docutils literal notranslate"><span class="pre">sudo</span></code> may be required for installing
+Python packages), no action is required.</p></li>
+</ul>
+<p>Finally, check</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>which python
+python -V
+</pre></div>
+</div>
+<p>to make sure that the desired Python binary is used. During the CMake config
+step (when running <code class="docutils literal notranslate"><span class="pre">cmake</span> <span class="pre">..</span></code>), check the printed message indicating
+<code class="docutils literal notranslate"><span class="pre">Found</span> <span class="pre">PythonInterp</span></code>. E.g. the line may look like this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-- Found PythonInterp: /your/path/to/bin/python3.6 <span class="o">(</span>found version <span class="s2">&quot;3.6.6&quot;</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>Alternatively, CMake flag <code class="docutils literal notranslate"><span class="pre">-DPYTHON_EXECUTABLE=/path/to/my/python</span></code>
+can be set to force CMake to use the specified Python executable.</p>
+</div>
+<div class="section" id="jupyter-visualization-widgets-support-experimental">
+<h4>2.2 Jupyter visualization widgets support (experimental)<a class="headerlink" href="#jupyter-visualization-widgets-support-experimental" title="Permalink to this headline">¶</a></h4>
+<p>Since version <code class="docutils literal notranslate"><span class="pre">0.4.0</span></code>, we added experimental support for Jupyter
+visualization. To enable Jupyter visualization support, install
+<a class="reference external" href="https://nodejs.org/en/download/package-manager/">npm</a>. If <code class="docutils literal notranslate"><span class="pre">npm</span></code> is not
+installed, Jupyter visualization support will not be enabled, however the rest of
+the Python bindings will still work.</p>
+<p>To check the installation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>node -v
+npm -v
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>We recommended using modern versions of <code class="docutils literal notranslate"><span class="pre">node</span></code> and <code class="docutils literal notranslate"><span class="pre">npm</span></code>. Warning
+message will be printed if the <code class="docutils literal notranslate"><span class="pre">node</span></code> or <code class="docutils literal notranslate"><span class="pre">npm</span></code> versions are too old for
+the node packages that the Jupyter visualizer depends on.
+Please refer to
+<a class="reference external" href="https://nodejs.org/en/download/package-manager/">the official documentation</a>
+on how to upgrade to the latest version.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Jupyter notebook visualization with OpenGL is still experimental
+Expect to see bugs and missing features.</p>
+</div>
+</div>
+<div class="section" id="disable-python-binding">
+<h4>2.3 Disable Python binding<a class="headerlink" href="#disable-python-binding" title="Permalink to this headline">¶</a></h4>
+<p>If Python binding is not needed, it can be turned off by setting the following
+compilation options to <code class="docutils literal notranslate"><span class="pre">OFF</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">BUILD_PYBIND11</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BUILD_PYTHON_MODULE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BUILD_PYTHON_TUTORIALS</span></code></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="config">
+<span id="compilation-ubuntu-config"></span><h3>3. Config<a class="headerlink" href="#config" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir build
+<span class="nb">cd</span> build
+cmake -DCMAKE_INSTALL_PREFIX<span class="o">=</span>&lt;open3d_install_directory&gt; ..
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">CMAKE_INSTALL_PREFIX</span></code> argument is optional and can be used to install
+Open3D to a user location. In the absence of this argument Open3D will be
+installed to a system location (sudo required). For more customizations of the
+build, please see <a class="reference internal" href="#compilation-options"><span class="std std-ref">Compilation Options</span></a>.</p>
+</div>
+<div class="section" id="build">
+<span id="compilation-ubuntu-build"></span><h3>4. Build<a class="headerlink" href="#build" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># On Ubuntu</span>
+make -j<span class="k">$(</span>nproc<span class="k">)</span>
+
+<span class="c1"># On macOS</span>
+make -j<span class="k">$(</span>sysctl -n hw.physicalcpu<span class="k">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="install">
+<span id="compilation-ubuntu-install"></span><h3>5. Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="install-open3d-python-package">
+<h4>5.1 Install Open3D Python package<a class="headerlink" href="#install-open3d-python-package" title="Permalink to this headline">¶</a></h4>
+<p>Inside the activated virtualenv (shall be activated before <code class="docutils literal notranslate"><span class="pre">cmake</span></code>),
+run</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1) Create Python package</span>
+<span class="c1"># 2) Create pip wheel</span>
+<span class="c1"># 3) Install Open3D pip wheel the current virtualenv</span>
+make install-pip-package
+</pre></div>
+</div>
+<p>The above command is <strong>compatible with both pip and Conda virtualenvs</strong>. To
+uninstall, run</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip uninstall open3d
+</pre></div>
+</div>
+<p>If more fine-grained controls, here is a list of all related build targets:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create Python package in build/lib/python_package</span>
+make python-package
+
+<span class="c1"># Create pip wheel in build/lib/python_package/pip_package</span>
+make pip-package
+
+<span class="c1"># Create conda package in build/lib/python_package/conda_package</span>
+make conda-package
+
+<span class="c1"># Install pip wheel</span>
+make install-pip-package
+</pre></div>
+</div>
+<p>If the installation is successful, we shall now be able to import Open3D</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python -c <span class="s2">&quot;import open3d&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-open3d-as-a-c-library">
+<h4>5.2 Install Open3D as a C++ library<a class="headerlink" href="#install-open3d-as-a-c-library" title="Permalink to this headline">¶</a></h4>
+<p>To Install/uninstall the Open3D as a C++ library (headers and binaries):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> build
+make install
+...
+make uninstall
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code class="docutils literal notranslate"><span class="pre">sudo</span></code> may be needed to install Open3D to a system location.</p>
+</div>
+<p>To link a C++ project against the Open3D C++ library, please refer to
+<a class="reference internal" href="tutorial/C++/cplusplus_interface.html#create-cplusplus-project"><span class="std std-ref">Create C++ project</span></a>, starting from
+<a class="reference external" href="https://github.com/intel-isl/Open3D/tree/master/docs/_static/C%2B%2B">this example CMake file</a>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="macos">
+<span id="compilation-osx"></span><h2>MacOS<a class="headerlink" href="#macos" title="Permalink to this headline">¶</a></h2>
+<p>The MacOS compilation steps are mostly identical with <a class="reference internal" href="#compilation-ubuntu"><span class="std std-ref">Ubuntu</span></a>.</p>
+<div class="section" id="id1">
+<h3>1. Install dependencies (optional)<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Run <code class="docutils literal notranslate"><span class="pre">util/scripts/install-deps-osx.sh</span></code>. We use <a class="reference external" href="https://brew.sh/">homebrew</a>
+to manage dependencies. Follow the instructions from the script.</p>
+</div>
+<div class="section" id="id2">
+<h3>2. Setup Python binding environments<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Same as the steps for Ubuntu: <a class="reference internal" href="#compilation-ubuntu-python-binding"><span class="std std-ref">2. Setup Python binding environments</span></a>.</p>
+</div>
+<div class="section" id="id3">
+<h3>3. Config<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>Same as the steps for Ubuntu: <a class="reference internal" href="#compilation-ubuntu-config"><span class="std std-ref">3. Config</span></a>.</p>
+<p>Alternatively, to use Xcode IDE, run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir build-xcode
+<span class="nb">cd</span> build-xcode
+cmake -G Xcode -DCMAKE_INSTALL_PREFIX<span class="o">=</span>&lt;open3d_install_directory&gt; ..
+open Open3D.xcodeproj/
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h3>4. Build<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>Same as the steps for Ubuntu: <a class="reference internal" href="#compilation-ubuntu-build"><span class="std std-ref">4. Build</span></a>.</p>
+</div>
+<div class="section" id="id5">
+<h3>5. Install<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>Same as the steps for Ubuntu: <a class="reference internal" href="#compilation-ubuntu-install"><span class="std std-ref">5. Install</span></a>.</p>
+</div>
+</div>
+<div class="section" id="windows">
+<span id="compilation-windows"></span><h2>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h2>
+<p>On Windows, only <strong>Visual Studio 2015 update 3</strong> and newer are supported since
+Open3D relies heavily on C++11 language features.</p>
+<div class="section" id="dependencies">
+<h3>1. Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h3>
+<p>For easy compilation, we have included source code of all dependent libraries
+in the <code class="docutils literal notranslate"><span class="pre">3rdparty</span></code> folder. Therefore, we don’t need to install any dependencies.</p>
+</div>
+<div class="section" id="id6">
+<h3>2. Setup Python binding environments<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>Most steps are the steps for Ubuntu: <a class="reference internal" href="#compilation-ubuntu-python-binding"><span class="std std-ref">2. Setup Python binding environments</span></a>.
+Instead of <code class="docutils literal notranslate"><span class="pre">which</span></code>, check the Python path with <code class="docutils literal notranslate"><span class="pre">where</span> <span class="pre">python</span></code>, also pay
+attention to the <code class="docutils literal notranslate"><span class="pre">Found</span> <span class="pre">PythonInterp</span></code> message printed by CMake.</p>
+</div>
+<div class="section" id="config-generate-visual-studio-solution">
+<h3>3. Config (generate Visual Studio solution)<a class="headerlink" href="#config-generate-visual-studio-solution" title="Permalink to this headline">¶</a></h3>
+<p>The CMake GUI is as shown in the following figure. Specify the
+directories, click <code class="docutils literal notranslate"><span class="pre">Configure</span></code> and choose the correct Visual Studio
+version (e.g., <code class="docutils literal notranslate"><span class="pre">Visual</span> <span class="pre">Studio</span> <span class="pre">14</span> <span class="pre">2015</span> <span class="pre">Win64</span></code>), then click <code class="docutils literal notranslate"><span class="pre">Generate</span></code>.
+This will create an <code class="docutils literal notranslate"><span class="pre">Open3D.sln</span></code> file in the build directory.</p>
+<a class="reference internal image-reference" href="_images/cmake_windows.png"><img alt="_images/cmake_windows.png" src="_images/cmake_windows.png" style="width: 500px;" /></a>
+<p>Alternatively, this file can be generated by calling CMake from the console:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span><span class="k">mkdir</span> build
+<span class="k">cd</span> build
+
+<span class="p">:</span><span class="c1">: Run one of the following lines based on your Visual Studio version</span>
+cmake -G <span class="s2">&quot;Visual Studio 14 2015 Win64&quot;</span> ..
+cmake -G <span class="s2">&quot;Visual Studio 15 2017 Win64&quot;</span> ..
+cmake -G <span class="s2">&quot;Visual Studio 16 2019 Win64&quot;</span> ..
+</pre></div>
+</div>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<p>If cmake fail to find <code class="docutils literal notranslate"><span class="pre">PYTHON_EXECUTABLE</span></code>, follow the Ubuntu guide:
+<a class="reference internal" href="#compilation-ubuntu-python-binding"><span class="std std-ref">2. Setup Python binding environments</span></a> to activate the Python virtualenv before running
+<code class="docutils literal notranslate"><span class="pre">cmake</span></code> or specify the Python path manually.</p>
+</div>
+<p>By default, CMake links with dynamic runtime (<code class="docutils literal notranslate"><span class="pre">/MD</span></code> or <code class="docutils literal notranslate"><span class="pre">/MDd</span></code>). To link with
+static runtime (<code class="docutils literal notranslate"><span class="pre">/MT</span></code> or <code class="docutils literal notranslate"><span class="pre">/MTd</span></code>) set <code class="docutils literal notranslate"><span class="pre">-DSTATIC_WINDOWS_RUNTIME=ON</span></code>.</p>
+</div>
+<div class="section" id="id7">
+<h3>4. Build<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p>Open <code class="docutils literal notranslate"><span class="pre">Open3D.sln</span></code> file with Visual Studio, change the build type to
+<code class="docutils literal notranslate"><span class="pre">Release</span></code>, then rebuild the <code class="docutils literal notranslate"><span class="pre">ALL_BUILD</span></code> target.</p>
+<a class="reference internal image-reference" href="_images/open3d.vc_solution.hightlights.png"><img alt="_images/open3d.vc_solution.hightlights.png" src="_images/open3d.vc_solution.hightlights.png" style="width: 250px;" /></a>
+<p>Alternatively, we can also build directly from the CMD terminal. Run</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>cmake --build . --parallel <span class="nv">%NUMBER_OF_PROCESSORS%</span> --config Release --target ALL_BUILD
+</pre></div>
+</div>
+</div>
+<div class="section" id="id8">
+<h3>5. Install<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<p>Open3D can be installed as a C++ library or a Python package, by building the
+corresponding targets with Visual Studio or from the terminal. E.g.</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>cmake --build . --parallel <span class="nv">%NUMBER_OF_PROCESSORS%</span> --config Release --target the-target-name
+</pre></div>
+</div>
+<p>Here’s a list of installation related targets. Please refer to
+<a class="reference internal" href="#compilation-ubuntu-install"><span class="std std-ref">5. Install</span></a> for more detailed documentation.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">install</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">python-package</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pip-package</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">install-pip-package</span></code></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="sanity-check">
+<h2>Sanity check<a class="headerlink" href="#sanity-check" title="Permalink to this headline">¶</a></h2>
+<p>For a quick sanity check, try importing the library from the Python interactive
+shell:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python
+
+&gt;&gt;&gt; import open3d
+</pre></div>
+</div>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<p>If there is an issue, check whether the Python version detected by
+CMake (see <code class="docutils literal notranslate"><span class="pre">Found</span> <span class="pre">PythonInterp</span></code> log from CMake, or check the value of the
+<code class="docutils literal notranslate"><span class="pre">PYTHON_EXECUTABLE</span></code> CMake variable) and the Python version for command
+line environment (type <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-V</span></code>). They should match. If it is not,
+please follow <a class="reference internal" href="#compilation-ubuntu-python-binding"><span class="std std-ref">2. Setup Python binding environments</span></a> in docs. In addition,
+<a class="reference external" href="https://github.com/intel-isl/Open3D/issues?utf8=%E2%9C%93&amp;q=is%3Aissue+label%3A%22python+binding%22+">python binding issue</a>
+on Github repository has helpful notes from Open3D users.</p>
+</div>
+</div>
+<div class="section" id="compilation-options">
+<span id="id9"></span><h2>Compilation Options<a class="headerlink" href="#compilation-options" title="Permalink to this headline">¶</a></h2>
+<p>This page shows advanced options to customize the Open3D build. For quick
+start, see <a class="reference internal" href="#compilation"><span class="std std-ref">Compiling from source</span></a>.</p>
+<div class="section" id="compilation-options-dependencies">
+<span id="id10"></span><h3>Dependencies<a class="headerlink" href="#compilation-options-dependencies" title="Permalink to this headline">¶</a></h3>
+<p>For each dependent library, there is a corresponding CMake build option
+<code class="docutils literal notranslate"><span class="pre">BUILD_&lt;LIBRARY_NAME&gt;</span></code>. If the option is <code class="docutils literal notranslate"><span class="pre">ON</span></code>, the dependent library is
+forced to be compiled from the source code included in <code class="docutils literal notranslate"><span class="pre">3rdparty</span></code> folder. If
+it is <code class="docutils literal notranslate"><span class="pre">OFF</span></code>, CMake will try to find system installed libraries and use it.
+If CMake fails to find the dependent library, it falls back to compiling the
+library from source code.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>On Ubuntu and MacOS it is recommended to link Open3D to system installed
+libraries. The dependencies can be installed via scripts
+<code class="docutils literal notranslate"><span class="pre">util/scripts/install-deps-ubuntu.sh</span></code> and
+<code class="docutils literal notranslate"><span class="pre">util/scripts/install-deps-osx.sh</span></code>. On Windows, it is recommended to
+compile everything from source since Windows lacks a package management
+software.</p>
+</div>
+<p>The following is an example of forcing building dependencies from source code:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake -DBUILD_EIGEN3<span class="o">=</span>ON  <span class="se">\</span>
+      -DBUILD_GLEW<span class="o">=</span>ON    <span class="se">\</span>
+      -DBUILD_GLFW<span class="o">=</span>ON    <span class="se">\</span>
+      -DBUILD_JSONCPP<span class="o">=</span>ON <span class="se">\</span>
+      -DBUILD_PNG<span class="o">=</span>ON     <span class="se">\</span>
+      ..
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Enabling these build options may increase the compilation time.</p>
+</div>
+</div>
+<div class="section" id="openmp">
+<h3>OpenMP<a class="headerlink" href="#openmp" title="Permalink to this headline">¶</a></h3>
+<p>We automatically detect if the C++ compiler supports OpenMP and compile Open3D
+with it if the compilation option <code class="docutils literal notranslate"><span class="pre">WITH_OPENMP</span></code> is <code class="docutils literal notranslate"><span class="pre">ON</span></code>.
+OpenMP can greatly accelerate computation on a multi-core CPU.</p>
+<p>The default LLVM compiler on OS X does not support OpenMP.
+A workaround is to install a C++ compiler with OpenMP support, such as <code class="docutils literal notranslate"><span class="pre">gcc</span></code>,
+then use it to compile Open3D. For example, starting from a clean build
+directory, run</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew install gcc --without-multilib
+cmake -DCMAKE_C_COMPILER<span class="o">=</span>gcc-6 -DCMAKE_CXX_COMPILER<span class="o">=</span>g++-6 ..
+make -j
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This workaround has some compatibility issues with the source code of
+GLFW included in <code class="docutils literal notranslate"><span class="pre">3rdparty</span></code>.
+Make sure Open3D is linked against GLFW installed on the OS.</p>
+</div>
+</div>
+<div class="section" id="unit-test">
+<h3>Unit test<a class="headerlink" href="#unit-test" title="Permalink to this headline">¶</a></h3>
+<p>To build unit tests, set <cite>BUILD_UNIT_TESTS=ON</cite> at CMake config stage. The unit
+test executable will be located at <cite>bin/unitTests</cite> in the <cite>build</cite> directory.</p>
+<p>Please also refer to <a class="reference external" href="https://github.com/google/googletest.git">googletest</a> for
+reference.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># In the build directory</span>
+cmake -DBUILD_UNIT_TESTS<span class="o">=</span>ON ..
+make -j
+./bin/unitTests
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="builddocs.html" class="btn btn-neutral float-right" title="Building Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="getting_started.html" class="btn btn-neutral float-left" title="Getting Started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018 - 2019, www.open3d.org
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+<span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Docs version</span>
+    latest (cf20af6)
+    <span class="fa fa-caret-down"></span>
+</span>
+
+<!-- A hack to include an external page to get around CORS policy -->
+<!-- https://stackoverflow.com/a/15250208/1255535 -->
+<div class="rst-other-versions">
+    <dl>
+    <dt>Versions</dt>
+        <dd><ul>
+            <script src="http://www.open3d.org/docs/versions.js"></script>
+        </ul></dd>
+    </dl>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

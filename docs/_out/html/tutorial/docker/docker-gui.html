@@ -1,0 +1,409 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Docker GUI &mdash; Open3D latest (cf20af6) documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/open3d_logo.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Docker test" href="docker-test.html" />
+    <link rel="prev" title="Docker" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Open3D
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest (cf20af6)
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">About Open3D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../compilation.html">Compiling from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../builddocs.html">Building Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute.html">Contributing to Open3D</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorial</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Basic/index.html">Basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Advanced/index.html">Advanced</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ReconstructionSystem/index.html">Reconstruction system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../C++/cplusplus_interface.html">C++ interface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Docker</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Docker GUI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#usage-notes">Usage notes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#docker-files">Docker files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#remote-access">Remote access</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#running-at-the-host-terminal">Running at the host terminal</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="docker-test.html">Docker test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#ubuntu-installation">Ubuntu installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#proxy-settings">Proxy settings</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.camera.html">open3d.camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.color_map.html">open3d.color_map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.geometry.html">open3d.geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.io.html">open3d.io</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.integration.html">open3d.integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.odometry.html">open3d.odometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.registration.html">open3d.registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.utility.html">open3d.utility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.visualization.html">open3d.visualization</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Open3D</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Docker</a> &raquo;</li>
+        
+      <li>Docker GUI</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="docker-gui">
+<span id="id1"></span><h1>Docker GUI<a class="headerlink" href="#docker-gui" title="Permalink to this headline">¶</a></h1>
+<p>The following document describes a solution for utilizing Open3D with GUI/visualization under Docker.</p>
+<p>Utilizing this approach the user can:</p>
+<ul class="simple">
+<li><p>sandbox Open3D from other applications on a machine</p></li>
+<li><p>operate Open3D on a headless machine using VNC or the terminal</p></li>
+<li><p>edit the Open3D code on the host side but run it inside an Open3D container</p></li>
+</ul>
+<p>This recipe was developed and tested on Ubuntu 18.04. Other distributions might need slightly different instructions.</p>
+<div class="section" id="usage-notes">
+<span id="docker-gui-usage-notes"></span><h2>Usage notes<a class="headerlink" href="#usage-notes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="docker-files">
+<span id="docker-gui-files"></span><h3>Docker files<a class="headerlink" href="#docker-files" title="Permalink to this headline">¶</a></h3>
+<p>The docker setup files and tools can be found under <a class="reference external" href="https://github.com/intel-isl/Open3D/tree/docker/util/docker/open3d-xvfb">Open3d/util/docker/open3d-xvfb</a>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Dockerfile</p></li>
+<li><dl class="simple">
+<dt>setup</dt><dd><ul>
+<li><p>entrypoint.s</p></li>
+<li><p>docker_sample.sh</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>tools</dt><dd><ul>
+<li><p>attach.sh</p></li>
+<li><p>build.sh</p></li>
+<li><p>delete.sh</p></li>
+<li><p>name.sh</p></li>
+<li><p>prune.sh</p></li>
+<li><p>run.sh</p></li>
+<li><p>stop.sh</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p><strong>Dockerfile</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> is the Docker script used to build the Open3D image.</p>
+<p><strong>Tools</strong></p>
+<p>We provide a number of Docker tools for convenience:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">attach.sh</span></code>
+Attach a terminal to a running Open3D docker container.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">build.sh</span></code>
+Build the Open3D docker image.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">delete.sh</span></code>
+Delete the Open3D image.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prune.sh</span></code>
+Delete <strong>all</strong> stopped containers and <strong>all</strong> dangling images.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">run.sh</span></code>
+Run the Open3D container. Checkout Open3D, build and install.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stop.sh</span></code>
+Stop the Open3D container.</p></li>
+</ul>
+<p>A typical flow of events when working with docker looks like this:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> &lt;open3d_path&gt;/util/docker/open3d_xvfb/tools
+$ ./build.sh
+$ ./run.sh
+root@open3d-xvfb:~/open3d/build# &lt;<span class="k">do</span> some stuff&gt;
+root@open3d-xvfb:~/open3d/build# <span class="nb">exit</span>
+$ ./attach.sh
+root@open3d-xvfb:~/open3d# &lt;<span class="k">do</span> some stuff&gt;
+root@open3d-xvfb:~/open3d# <span class="nb">exit</span>
+$ ./stop.sh
+</pre></div>
+</div>
+<p>Building the Open3D Docker image will take approximately 10-15 minutes to complete.
+At the end the image will be ~1GB in size.</p>
+<p>Running the Open3D Docker container will perform the following steps:</p>
+<ul class="simple">
+<li><p>git clone Open3D master to <code class="docutils literal notranslate"><span class="pre">~/open3d_docker</span></code></p></li>
+<li><p>run the container in interactive mode with the host path <code class="docutils literal notranslate"><span class="pre">~/open3d_docker</span></code> mounted inside the container at <code class="docutils literal notranslate"><span class="pre">/root/Open3D</span></code></p></li>
+<li><p>build Open3D and install inside the docker container.</p></li>
+<li><p>attach a terminal to the Open3D container for command line input from the host side</p></li>
+</ul>
+<p>In order to disconnect from a running container type <code class="docutils literal notranslate"><span class="pre">exit</span></code> at the terminal.
+You can still attach to a running container at a later time.</p>
+<p>The Open3D container is automatically removed when stopped.
+None of the Open3D files are removed as they in fact reside on the host due to the Docker bind mounting functionality.
+In order to keep the container around (and not have to rebuild the Open3D binaries every time) remove the <code class="docutils literal notranslate"><span class="pre">-rm</span></code> option in <code class="docutils literal notranslate"><span class="pre">run.sh</span></code>.</p>
+<p>Prunning images/containers is useful when modifying/testing a new image.
+It cleans up the docker workspace and frees up disk space.</p>
+</div>
+<div class="section" id="remote-access">
+<span id="docker-gui-remote-access"></span><h3>Remote access<a class="headerlink" href="#remote-access" title="Permalink to this headline">¶</a></h3>
+<p>VNC can be used to remote into a running docker container.</p>
+<p>A running Open3D container listens to port 5920 on the host.
+The <code class="docutils literal notranslate"><span class="pre">run.sh</span></code> script redirects host port 5920 to container port 5900.</p>
+<p>This allows remoting into the container using VNC to <code class="docutils literal notranslate"><span class="pre">&lt;host</span> <span class="pre">ip&gt;:5920</span></code>.
+The default password is <code class="docutils literal notranslate"><span class="pre">1234</span></code> and can be changed in <code class="docutils literal notranslate"><span class="pre">Open3D/issue_17/util/docker/open3d-xvfb/setup/entrypoint.sh</span></code> (requires rebuilding the Open3D Docker image with <code class="docutils literal notranslate"><span class="pre">build.sh</span></code>).
+Once connected you can use Open3D as usual.</p>
+</div>
+<div class="section" id="running-at-the-host-terminal">
+<span id="docker-gui-host-terminal"></span><h3>Running at the host terminal<a class="headerlink" href="#running-at-the-host-terminal" title="Permalink to this headline">¶</a></h3>
+<p>It is also possible to run Open3D from a host terminal attached to a running Open3D Docker container.
+An example on how this can be perfomed:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># at the host terminal</span>
+$ sudo cp ~/open3d_docker/util/docker/open3d-xvfb/setup/docker_sample.sh <span class="se">\</span>
+          ~/open3d_docker/build/lib/Tutorial/Advanced
+$ <span class="nb">cd</span> ~/open3d_docker/utilities/docker/open3d-xvfb/tools
+$ ./attach.sh
+
+<span class="c1"># at the container terminal</span>
+$ <span class="nb">cd</span> ~/open3d/build/lib/Tutorial/Advanced
+$ sh docker_sample.sh
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="limitations">
+<span id="docker-gui-limitations"></span><h2>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><div class="line-block">
+<div class="line">the <code class="docutils literal notranslate"><span class="pre">lxde</span></code> user interface needs more configuring.</div>
+<div class="line">Some things won’t work as expected. For example the <code class="docutils literal notranslate"><span class="pre">UXTerm</span></code> doesn’t start and <code class="docutils literal notranslate"><span class="pre">lxterminal</span></code> may crash occasionally.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">the container screen resolution is set to 1280x1024x8.</div>
+<div class="line">The resolution will be increased in the future.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">there are some rendering issues.</div>
+<div class="line">Some images may be saved incorrectly to the disk. For example, when running the <code class="docutils literal notranslate"><span class="pre">headless_sample.py</span></code> sample the color images saved to the disk are black.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">run.sh</span></code> clones Open3D to a hardcoded location: <code class="docutils literal notranslate"><span class="pre">~/open3d_docker</span></code></div>
+<div class="line">We are considering the following alternatives:</div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>let the user specify the destination</p></li>
+<li><p>reuse the current location of Open3D</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="docker-test.html" class="btn btn-neutral float-right" title="Docker test" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Docker" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018 - 2019, www.open3d.org
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+<span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Docs version</span>
+    latest (cf20af6)
+    <span class="fa fa-caret-down"></span>
+</span>
+
+<!-- A hack to include an external page to get around CORS policy -->
+<!-- https://stackoverflow.com/a/15250208/1255535 -->
+<div class="rst-other-versions">
+    <dl>
+    <dt>Versions</dt>
+        <dd><ul>
+            <script src="http://www.open3d.org/docs/versions.js"></script>
+        </ul></dd>
+    </dl>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

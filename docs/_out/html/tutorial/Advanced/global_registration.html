@@ -1,0 +1,590 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Global registration &mdash; Open3D latest (cf20af6) documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/open3d_logo.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Fast global registration" href="fast_global_registration.html" />
+    <link rel="prev" title="Colored point cloud registration" href="colored_pointcloud_registration.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Open3D
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest (cf20af6)
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">About Open3D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../compilation.html">Compiling from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../builddocs.html">Building Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute.html">Contributing to Open3D</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorial</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Basic/index.html">Basic</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Advanced</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="pointcloud_outlier_removal.html">Point cloud outlier removal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="colored_pointcloud_registration.html">Colored point cloud registration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Global registration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#input">Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#extract-geometric-feature">Extract geometric feature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ransac">RANSAC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#local-refinement">Local refinement</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fast_global_registration.html">Fast global registration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiway_registration.html">Multiway registration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rgbd_integration.html">RGBD integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="color_map_optimization.html">Color Map Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="customized_visualization.html">Customized visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="non_blocking_visualization.html">Non-blocking visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive_visualization.html">Interactive visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="headless_rendering.html">Headless rendering</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ReconstructionSystem/index.html">Reconstruction system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../C++/cplusplus_interface.html">C++ interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docker/index.html">Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.camera.html">open3d.camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.color_map.html">open3d.color_map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.geometry.html">open3d.geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.io.html">open3d.io</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.integration.html">open3d.integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.odometry.html">open3d.odometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.registration.html">open3d.registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.utility.html">open3d.utility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.visualization.html">open3d.visualization</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Open3D</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Advanced</a> &raquo;</li>
+        
+      <li>Global registration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="global-registration">
+<span id="id1"></span><h1>Global registration<a class="headerlink" href="#global-registration" title="Permalink to this headline">¶</a></h1>
+<p>Both <a class="reference internal" href="../Basic/icp_registration.html#icp-registration"><span class="std std-ref">ICP registration</span></a> and <a class="reference internal" href="colored_pointcloud_registration.html#colored-point-registration"><span class="std std-ref">Colored point cloud registration</span></a> are known as <strong>local</strong> registration methods because they rely on a rough alignment as initialization. This tutorial shows another class of registration methods, known as <strong>global</strong> registration. This family of algorithms do not require an alignment for initialization. They usually produce less tight alignment results and are used as initialization of the local methods.</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># examples/Python/Advanced/global_registration.py</span>
+
+<span class="kn">import</span> <span class="nn">open3d</span> <span class="kn">as</span> <span class="nn">o3d</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+
+
+<span class="k">def</span> <span class="nf">draw_registration_result</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">transformation</span><span class="p">):</span>
+    <span class="n">source_temp</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+    <span class="n">target_temp</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+    <span class="n">source_temp</span><span class="o">.</span><span class="n">paint_uniform_color</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.706</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="n">target_temp</span><span class="o">.</span><span class="n">paint_uniform_color</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.651</span><span class="p">,</span> <span class="mf">0.929</span><span class="p">])</span>
+    <span class="n">source_temp</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">transformation</span><span class="p">)</span>
+    <span class="n">o3d</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">draw_geometries</span><span class="p">([</span><span class="n">source_temp</span><span class="p">,</span> <span class="n">target_temp</span><span class="p">])</span>
+
+
+<span class="k">def</span> <span class="nf">preprocess_point_cloud</span><span class="p">(</span><span class="n">pcd</span><span class="p">,</span> <span class="n">voxel_size</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;:: Downsample with a voxel size </span><span class="si">%.3f</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="n">voxel_size</span><span class="p">)</span>
+    <span class="n">pcd_down</span> <span class="o">=</span> <span class="n">pcd</span><span class="o">.</span><span class="n">voxel_down_sample</span><span class="p">(</span><span class="n">voxel_size</span><span class="p">)</span>
+
+    <span class="n">radius_normal</span> <span class="o">=</span> <span class="n">voxel_size</span> <span class="o">*</span> <span class="mi">2</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;:: Estimate normal with search radius </span><span class="si">%.3f</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="n">radius_normal</span><span class="p">)</span>
+    <span class="n">pcd_down</span><span class="o">.</span><span class="n">estimate_normals</span><span class="p">(</span>
+        <span class="n">o3d</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">KDTreeSearchParamHybrid</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="n">radius_normal</span><span class="p">,</span> <span class="n">max_nn</span><span class="o">=</span><span class="mi">30</span><span class="p">))</span>
+
+    <span class="n">radius_feature</span> <span class="o">=</span> <span class="n">voxel_size</span> <span class="o">*</span> <span class="mi">5</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;:: Compute FPFH feature with search radius </span><span class="si">%.3f</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="n">radius_feature</span><span class="p">)</span>
+    <span class="n">pcd_fpfh</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">compute_fpfh_feature</span><span class="p">(</span>
+        <span class="n">pcd_down</span><span class="p">,</span>
+        <span class="n">o3d</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">KDTreeSearchParamHybrid</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="n">radius_feature</span><span class="p">,</span> <span class="n">max_nn</span><span class="o">=</span><span class="mi">100</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">pcd_down</span><span class="p">,</span> <span class="n">pcd_fpfh</span>
+
+
+<span class="k">def</span> <span class="nf">prepare_dataset</span><span class="p">(</span><span class="n">voxel_size</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;:: Load two point clouds and disturb initial pose.&quot;</span><span class="p">)</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_point_cloud</span><span class="p">(</span><span class="s2">&quot;../../TestData/ICP/cloud_bin_0.pcd&quot;</span><span class="p">)</span>
+    <span class="n">target</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_point_cloud</span><span class="p">(</span><span class="s2">&quot;../../TestData/ICP/cloud_bin_1.pcd&quot;</span><span class="p">)</span>
+    <span class="n">trans_init</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+                             <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]])</span>
+    <span class="n">source</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">trans_init</span><span class="p">)</span>
+    <span class="n">draw_registration_result</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+
+    <span class="n">source_down</span><span class="p">,</span> <span class="n">source_fpfh</span> <span class="o">=</span> <span class="n">preprocess_point_cloud</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">voxel_size</span><span class="p">)</span>
+    <span class="n">target_down</span><span class="p">,</span> <span class="n">target_fpfh</span> <span class="o">=</span> <span class="n">preprocess_point_cloud</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">voxel_size</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">source_down</span><span class="p">,</span> <span class="n">target_down</span><span class="p">,</span> <span class="n">source_fpfh</span><span class="p">,</span> <span class="n">target_fpfh</span>
+
+
+<span class="k">def</span> <span class="nf">execute_global_registration</span><span class="p">(</span><span class="n">source_down</span><span class="p">,</span> <span class="n">target_down</span><span class="p">,</span> <span class="n">source_fpfh</span><span class="p">,</span>
+                                <span class="n">target_fpfh</span><span class="p">,</span> <span class="n">voxel_size</span><span class="p">):</span>
+    <span class="n">distance_threshold</span> <span class="o">=</span> <span class="n">voxel_size</span> <span class="o">*</span> <span class="mf">1.5</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;:: RANSAC registration on downsampled point clouds.&quot;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;   Since the downsampling voxel size is </span><span class="si">%.3f</span><span class="s2">,&quot;</span> <span class="o">%</span> <span class="n">voxel_size</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;   we use a liberal distance threshold </span><span class="si">%.3f</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="n">distance_threshold</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">registration_ransac_based_on_feature_matching</span><span class="p">(</span>
+        <span class="n">source_down</span><span class="p">,</span> <span class="n">target_down</span><span class="p">,</span> <span class="n">source_fpfh</span><span class="p">,</span> <span class="n">target_fpfh</span><span class="p">,</span> <span class="n">distance_threshold</span><span class="p">,</span>
+        <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">TransformationEstimationPointToPoint</span><span class="p">(</span><span class="bp">False</span><span class="p">),</span> <span class="mi">4</span><span class="p">,</span> <span class="p">[</span>
+            <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">CorrespondenceCheckerBasedOnEdgeLength</span><span class="p">(</span><span class="mf">0.9</span><span class="p">),</span>
+            <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">CorrespondenceCheckerBasedOnDistance</span><span class="p">(</span>
+                <span class="n">distance_threshold</span><span class="p">)</span>
+        <span class="p">],</span> <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">RANSACConvergenceCriteria</span><span class="p">(</span><span class="mi">4000000</span><span class="p">,</span> <span class="mi">500</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span> <span class="nf">refine_registration</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">source_fpfh</span><span class="p">,</span> <span class="n">target_fpfh</span><span class="p">,</span> <span class="n">voxel_size</span><span class="p">):</span>
+    <span class="n">distance_threshold</span> <span class="o">=</span> <span class="n">voxel_size</span> <span class="o">*</span> <span class="mf">0.4</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;:: Point-to-plane ICP registration is applied on original point&quot;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;   clouds to refine the alignment. This time we use a strict&quot;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;   distance threshold </span><span class="si">%.3f</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="n">distance_threshold</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">registration_icp</span><span class="p">(</span>
+        <span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">distance_threshold</span><span class="p">,</span> <span class="n">result_ransac</span><span class="o">.</span><span class="n">transformation</span><span class="p">,</span>
+        <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">TransformationEstimationPointToPlane</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">voxel_size</span> <span class="o">=</span> <span class="mf">0.05</span>  <span class="c1"># means 5cm for the dataset</span>
+    <span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">source_down</span><span class="p">,</span> <span class="n">target_down</span><span class="p">,</span> <span class="n">source_fpfh</span><span class="p">,</span> <span class="n">target_fpfh</span> <span class="o">=</span> \
+            <span class="n">prepare_dataset</span><span class="p">(</span><span class="n">voxel_size</span><span class="p">)</span>
+
+    <span class="n">result_ransac</span> <span class="o">=</span> <span class="n">execute_global_registration</span><span class="p">(</span><span class="n">source_down</span><span class="p">,</span> <span class="n">target_down</span><span class="p">,</span>
+                                                <span class="n">source_fpfh</span><span class="p">,</span> <span class="n">target_fpfh</span><span class="p">,</span>
+                                                <span class="n">voxel_size</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">result_ransac</span><span class="p">)</span>
+    <span class="n">draw_registration_result</span><span class="p">(</span><span class="n">source_down</span><span class="p">,</span> <span class="n">target_down</span><span class="p">,</span>
+                             <span class="n">result_ransac</span><span class="o">.</span><span class="n">transformation</span><span class="p">)</span>
+
+    <span class="n">result_icp</span> <span class="o">=</span> <span class="n">refine_registration</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">source_fpfh</span><span class="p">,</span> <span class="n">target_fpfh</span><span class="p">,</span>
+                                     <span class="n">voxel_size</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">result_icp</span><span class="p">)</span>
+    <span class="n">draw_registration_result</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">result_icp</span><span class="o">.</span><span class="n">transformation</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="input">
+<h2>Input<a class="headerlink" href="#input" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;:: Load two point clouds and disturb initial pose.&quot;</span><span class="p">)</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_point_cloud</span><span class="p">(</span><span class="s2">&quot;../../TestData/ICP/cloud_bin_0.pcd&quot;</span><span class="p">)</span>
+    <span class="n">target</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_point_cloud</span><span class="p">(</span><span class="s2">&quot;../../TestData/ICP/cloud_bin_1.pcd&quot;</span><span class="p">)</span>
+    <span class="n">trans_init</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+                             <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]])</span>
+    <span class="n">source</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">trans_init</span><span class="p">)</span>
+    <span class="n">draw_registration_result</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+
+    <span class="n">source_down</span><span class="p">,</span> <span class="n">source_fpfh</span> <span class="o">=</span> <span class="n">preprocess_point_cloud</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">voxel_size</span><span class="p">)</span>
+    <span class="n">target_down</span><span class="p">,</span> <span class="n">target_fpfh</span> <span class="o">=</span> <span class="n">preprocess_point_cloud</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">voxel_size</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">source_down</span><span class="p">,</span> <span class="n">target_down</span><span class="p">,</span> <span class="n">source_fpfh</span><span class="p">,</span> <span class="n">target_fpfh</span>
+
+</pre></div>
+</td></tr></table></div>
+<p>This script reads a source point cloud and a target point cloud from two files. They are misaligned with an identity matrix as transformation.</p>
+<a class="reference internal image-reference" href="../../_images/initial2.png"><img alt="../../_images/initial2.png" src="../../_images/initial2.png" style="width: 400px;" /></a>
+</div>
+<div class="section" id="extract-geometric-feature">
+<span id="id2"></span><h2>Extract geometric feature<a class="headerlink" href="#extract-geometric-feature" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">preprocess_point_cloud</span><span class="p">(</span><span class="n">pcd</span><span class="p">,</span> <span class="n">voxel_size</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;:: Downsample with a voxel size </span><span class="si">%.3f</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="n">voxel_size</span><span class="p">)</span>
+    <span class="n">pcd_down</span> <span class="o">=</span> <span class="n">pcd</span><span class="o">.</span><span class="n">voxel_down_sample</span><span class="p">(</span><span class="n">voxel_size</span><span class="p">)</span>
+
+    <span class="n">radius_normal</span> <span class="o">=</span> <span class="n">voxel_size</span> <span class="o">*</span> <span class="mi">2</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;:: Estimate normal with search radius </span><span class="si">%.3f</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="n">radius_normal</span><span class="p">)</span>
+    <span class="n">pcd_down</span><span class="o">.</span><span class="n">estimate_normals</span><span class="p">(</span>
+        <span class="n">o3d</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">KDTreeSearchParamHybrid</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="n">radius_normal</span><span class="p">,</span> <span class="n">max_nn</span><span class="o">=</span><span class="mi">30</span><span class="p">))</span>
+
+    <span class="n">radius_feature</span> <span class="o">=</span> <span class="n">voxel_size</span> <span class="o">*</span> <span class="mi">5</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;:: Compute FPFH feature with search radius </span><span class="si">%.3f</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="n">radius_feature</span><span class="p">)</span>
+    <span class="n">pcd_fpfh</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">compute_fpfh_feature</span><span class="p">(</span>
+        <span class="n">pcd_down</span><span class="p">,</span>
+        <span class="n">o3d</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">KDTreeSearchParamHybrid</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="n">radius_feature</span><span class="p">,</span> <span class="n">max_nn</span><span class="o">=</span><span class="mi">100</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">pcd_down</span><span class="p">,</span> <span class="n">pcd_fpfh</span>
+
+</pre></div>
+</td></tr></table></div>
+<p>We down sample the point cloud, estimate normals, then compute a FPFH feature for each point. The FPFH feature is a 33-dimensional vector that describes the local geometric property of a point. A nearest neighbor query in the 33-dimensinal space can return points with similar local geometric structures. See <a class="reference internal" href="../reference.html#rasu2009" id="id3"><span>[Rasu2009]</span></a> for details.</p>
+</div>
+<div class="section" id="ransac">
+<span id="feature-matching"></span><h2>RANSAC<a class="headerlink" href="#ransac" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">execute_global_registration</span><span class="p">(</span><span class="n">source_down</span><span class="p">,</span> <span class="n">target_down</span><span class="p">,</span> <span class="n">source_fpfh</span><span class="p">,</span>
+                                <span class="n">target_fpfh</span><span class="p">,</span> <span class="n">voxel_size</span><span class="p">):</span>
+    <span class="n">distance_threshold</span> <span class="o">=</span> <span class="n">voxel_size</span> <span class="o">*</span> <span class="mf">1.5</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;:: RANSAC registration on downsampled point clouds.&quot;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;   Since the downsampling voxel size is </span><span class="si">%.3f</span><span class="s2">,&quot;</span> <span class="o">%</span> <span class="n">voxel_size</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;   we use a liberal distance threshold </span><span class="si">%.3f</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="n">distance_threshold</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">registration_ransac_based_on_feature_matching</span><span class="p">(</span>
+        <span class="n">source_down</span><span class="p">,</span> <span class="n">target_down</span><span class="p">,</span> <span class="n">source_fpfh</span><span class="p">,</span> <span class="n">target_fpfh</span><span class="p">,</span> <span class="n">distance_threshold</span><span class="p">,</span>
+        <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">TransformationEstimationPointToPoint</span><span class="p">(</span><span class="bp">False</span><span class="p">),</span> <span class="mi">4</span><span class="p">,</span> <span class="p">[</span>
+            <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">CorrespondenceCheckerBasedOnEdgeLength</span><span class="p">(</span><span class="mf">0.9</span><span class="p">),</span>
+            <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">CorrespondenceCheckerBasedOnDistance</span><span class="p">(</span>
+                <span class="n">distance_threshold</span><span class="p">)</span>
+        <span class="p">],</span> <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">RANSACConvergenceCriteria</span><span class="p">(</span><span class="mi">4000000</span><span class="p">,</span> <span class="mi">500</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</td></tr></table></div>
+<p>We use RANSAC for global registration. In each RANSAC iteration, <code class="docutils literal notranslate"><span class="pre">ransac_n</span></code> random points are picked from the source point cloud. Their corresponding points in the target point cloud are detected by querying the nearest neighbor in the 33-dimensional FPFH feature space. A pruning step takes fast pruning algorithms  to quickly reject false matches early.</p>
+<p>Open3D provides the following pruning algorithms:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CorrespondenceCheckerBasedOnDistance</span></code> checks if aligned point clouds are close (less than specified threshold).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CorrespondenceCheckerBasedOnEdgeLength</span></code> checks if the lengths of any two arbitrary edges (line formed by two vertices) individually drawn from source and target correspondences are similar. This tutorial checks that <span class="math notranslate nohighlight">\(||edge_{source}|| &gt; 0.9 \times ||edge_{target}||\)</span> and <span class="math notranslate nohighlight">\(||edge_{target}|| &gt; 0.9 \times ||edge_{source}||\)</span> are true.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CorrespondenceCheckerBasedOnNormal</span></code> considers vertex normal affinity of any correspondences. It computes dot product of two normal vectors. It takes radian value for the threshold.</p></li>
+</ul>
+<p>Only matches that pass the pruning step are used to compute a transformation, which is validated on the entire point cloud. The core function is <code class="docutils literal notranslate"><span class="pre">registration_ransac_based_on_feature_matching</span></code>. The most important hyperparameter of this function is <code class="docutils literal notranslate"><span class="pre">RANSACConvergenceCriteria</span></code>. It defines the maximum number of RANSAC iterations and the maximum number of validation steps. The larger these two numbers are, the more accurate the result is, but also the more time the algorithm takes.</p>
+<p>We set the RANSAC parameters based on the empirical value provided by <a class="reference internal" href="../reference.html#choi2015" id="id4"><span>[Choi2015]</span></a>. The result is</p>
+<a class="reference internal image-reference" href="../../_images/ransac.png"><img alt="../../_images/ransac.png" src="../../_images/ransac.png" style="width: 400px;" /></a>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Open3D provides faster implementation for global registration. Please refer <a class="reference internal" href="fast_global_registration.html#fast-global-registration"><span class="std std-ref">Fast global registration</span></a>.</p>
+</div>
+</div>
+<div class="section" id="local-refinement">
+<span id="id5"></span><h2>Local refinement<a class="headerlink" href="#local-refinement" title="Permalink to this headline">¶</a></h2>
+<p>For performance reason, the global registration is only performed on a heavily down-sampled point cloud. The result is also not tight. We use <a class="reference internal" href="../Basic/icp_registration.html#point-to-plane-icp"><span class="std std-ref">Point-to-plane ICP</span></a> to further refine the alignment.</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>69
+70
+71
+72
+73
+74
+75
+76
+77</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">refine_registration</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">source_fpfh</span><span class="p">,</span> <span class="n">target_fpfh</span><span class="p">,</span> <span class="n">voxel_size</span><span class="p">):</span>
+    <span class="n">distance_threshold</span> <span class="o">=</span> <span class="n">voxel_size</span> <span class="o">*</span> <span class="mf">0.4</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;:: Point-to-plane ICP registration is applied on original point&quot;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;   clouds to refine the alignment. This time we use a strict&quot;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;   distance threshold </span><span class="si">%.3f</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="n">distance_threshold</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">registration_icp</span><span class="p">(</span>
+        <span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">distance_threshold</span><span class="p">,</span> <span class="n">result_ransac</span><span class="o">.</span><span class="n">transformation</span><span class="p">,</span>
+        <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">TransformationEstimationPointToPlane</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</td></tr></table></div>
+<p>Outputs a tight alignment. This summarizes a complete pairwise registration workflow.</p>
+<a class="reference internal image-reference" href="../../_images/icp.png"><img alt="../../_images/icp.png" src="../../_images/icp.png" style="width: 400px;" /></a>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="fast_global_registration.html" class="btn btn-neutral float-right" title="Fast global registration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="colored_pointcloud_registration.html" class="btn btn-neutral float-left" title="Colored point cloud registration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018 - 2019, www.open3d.org
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+<span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Docs version</span>
+    latest (cf20af6)
+    <span class="fa fa-caret-down"></span>
+</span>
+
+<!-- A hack to include an external page to get around CORS policy -->
+<!-- https://stackoverflow.com/a/15250208/1255535 -->
+<div class="rst-other-versions">
+    <dl>
+    <dt>Versions</dt>
+        <dd><ul>
+            <script src="http://www.open3d.org/docs/versions.js"></script>
+        </ul></dd>
+    </dl>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

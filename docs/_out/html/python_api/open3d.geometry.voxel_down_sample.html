@@ -1,0 +1,328 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>open3d.geometry.voxel_down_sample &mdash; Open3D latest (cf20af6) documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/open3d_logo.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="open3d.geometry.voxel_down_sample_and_trace" href="open3d.geometry.voxel_down_sample_and_trace.html" />
+    <link rel="prev" title="open3d.geometry.uniform_down_sample" href="open3d.geometry.uniform_down_sample.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Open3D
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest (cf20af6)
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">About Open3D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compilation.html">Compiling from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../builddocs.html">Building Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute.html">Contributing to Open3D</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorial</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/Basic/index.html">Basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/Advanced/index.html">Advanced</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/ReconstructionSystem/index.html">Reconstruction system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/C++/cplusplus_interface.html">C++ interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/docker/index.html">Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/reference.html">Reference</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python API</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="open3d.camera.html">open3d.camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open3d.color_map.html">open3d.color_map</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="open3d.geometry.html">open3d.geometry</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.FilterScope.html">FilterScope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.Geometry.html">Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.Geometry2D.html">Geometry2D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.Geometry3D.html">Geometry3D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.HalfEdge.html">HalfEdge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.HalfEdgeTriangleMesh.html">HalfEdgeTriangleMesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.Image.html">Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.ImageFilterType.html">ImageFilterType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.KDTreeFlann.html">KDTreeFlann</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.KDTreeSearchParam.html">KDTreeSearchParam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.KDTreeSearchParamHybrid.html">KDTreeSearchParamHybrid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.KDTreeSearchParamKNN.html">KDTreeSearchParamKNN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.KDTreeSearchParamRadius.html">KDTreeSearchParamRadius</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.LineSet.html">LineSet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.Octree.html">Octree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.OctreeColorLeafNode.html">OctreeColorLeafNode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.OctreeInternalNode.html">OctreeInternalNode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.OctreeLeafNode.html">OctreeLeafNode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.OctreeNode.html">OctreeNode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.OctreeNodeInfo.html">OctreeNodeInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.PointCloud.html">PointCloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.RGBDImage.html">RGBDImage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.RotationType.html">RotationType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.SimplificationContraction.html">SimplificationContraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.TriangleMesh.html">TriangleMesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.Voxel.html">Voxel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.VoxelGrid.html">VoxelGrid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.compute_mesh_convex_hull.html">compute_mesh_convex_hull</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.compute_point_cloud_convex_hull.html">compute_point_cloud_convex_hull</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.compute_point_cloud_mahalanobis_distance.html">compute_point_cloud_mahalanobis_distance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.compute_point_cloud_mean_and_covariance.html">compute_point_cloud_mean_and_covariance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.compute_point_cloud_nearest_neighbor_distance.html">compute_point_cloud_nearest_neighbor_distance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.compute_point_cloud_to_point_cloud_distance.html">compute_point_cloud_to_point_cloud_distance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.create_half_edge_mesh_from_mesh.html">create_half_edge_mesh_from_mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.create_image_pyramid.html">create_image_pyramid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.create_line_set_from_point_cloud_correspondences.html">create_line_set_from_point_cloud_correspondences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.create_line_set_from_triangle_mesh.html">create_line_set_from_triangle_mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.create_mesh_arrow.html">create_mesh_arrow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.create_mesh_box.html">create_mesh_box</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.create_mesh_cone.html">create_mesh_cone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.create_mesh_coordinate_frame.html">create_mesh_coordinate_frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.create_mesh_cylinder.html">create_mesh_cylinder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.create_mesh_icosahedron.html">create_mesh_icosahedron</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.create_mesh_moebius.html">create_mesh_moebius</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.create_mesh_octahedron.html">create_mesh_octahedron</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.create_mesh_sphere.html">create_mesh_sphere</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.create_mesh_tetrahedron.html">create_mesh_tetrahedron</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.create_mesh_torus.html">create_mesh_torus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.create_point_cloud_from_depth_image.html">create_point_cloud_from_depth_image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.create_point_cloud_from_rgbd_image.html">create_point_cloud_from_rgbd_image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.create_rgbd_image_from_color_and_depth.html">create_rgbd_image_from_color_and_depth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.create_rgbd_image_from_nyu_format.html">create_rgbd_image_from_nyu_format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.create_rgbd_image_from_redwood_format.html">create_rgbd_image_from_redwood_format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.create_rgbd_image_from_sun_format.html">create_rgbd_image_from_sun_format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.create_rgbd_image_from_tum_format.html">create_rgbd_image_from_tum_format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.create_surface_voxel_grid_from_point_cloud.html">create_surface_voxel_grid_from_point_cloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.crop_point_cloud.html">crop_point_cloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.crop_triangle_mesh.html">crop_triangle_mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.estimate_normals.html">estimate_normals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.filter_image.html">filter_image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.filter_image_pyramid.html">filter_image_pyramid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.orient_normals_to_align_with_direction.html">orient_normals_to_align_with_direction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.orient_normals_towards_camera_location.html">orient_normals_towards_camera_location</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.radius_outlier_removal.html">radius_outlier_removal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.sample_points_poisson_disk.html">sample_points_poisson_disk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.sample_points_uniformly.html">sample_points_uniformly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.select_down_sample.html">select_down_sample</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.simplify_quadric_decimation.html">simplify_quadric_decimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.simplify_vertex_clustering.html">simplify_vertex_clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.statistical_outlier_removal.html">statistical_outlier_removal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.subdivide_loop.html">subdivide_loop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.subdivide_midpoint.html">subdivide_midpoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.uniform_down_sample.html">uniform_down_sample</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">voxel_down_sample</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.geometry.voxel_down_sample_and_trace.html">voxel_down_sample_and_trace</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="open3d.io.html">open3d.io</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open3d.integration.html">open3d.integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open3d.odometry.html">open3d.odometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open3d.registration.html">open3d.registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open3d.utility.html">open3d.utility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open3d.visualization.html">open3d.visualization</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Open3D</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="open3d.geometry.html">open3d.geometry</a> &raquo;</li>
+        
+      <li>open3d.geometry.voxel_down_sample</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="open3d-geometry-voxel-down-sample">
+<h1>open3d.geometry.voxel_down_sample<a class="headerlink" href="#open3d-geometry-voxel-down-sample" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="open3d.geometry.voxel_down_sample_and_trace.html" class="btn btn-neutral float-right" title="open3d.geometry.voxel_down_sample_and_trace" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="open3d.geometry.uniform_down_sample.html" class="btn btn-neutral float-left" title="open3d.geometry.uniform_down_sample" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018 - 2019, www.open3d.org
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+<span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Docs version</span>
+    latest (cf20af6)
+    <span class="fa fa-caret-down"></span>
+</span>
+
+<!-- A hack to include an external page to get around CORS policy -->
+<!-- https://stackoverflow.com/a/15250208/1255535 -->
+<div class="rst-other-versions">
+    <dl>
+    <dt>Versions</dt>
+        <dd><ul>
+            <script src="http://www.open3d.org/docs/versions.js"></script>
+        </ul></dd>
+    </dl>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

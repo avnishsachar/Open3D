@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated />
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="60decff0-1716-46a7-a6f7-7a3ec1155ae1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Open3D/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Open3D/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Open3D/Geometry/TriangleMesh.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Open3D/Geometry/TriangleMesh.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Open3D/Geometry/TriangleMesh.h" beforeDir="false" afterPath="$PROJECT_DIR$/../Open3D/Geometry/TriangleMesh.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/geometry/trianglemesh.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/geometry/trianglemesh.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Geometry/TriangleMesh.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Geometry/TriangleMesh.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../util/scripts/install-deps-ubuntu.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../../util/scripts/install-deps-ubuntu.sh" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
+  <component name="ProjectId" id="1QoUqPIjroavumh49mYF6HkqvwO" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="cf.advertisement.text.has.clang-format" value="true" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="showServicesTree" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="60decff0-1716-46a7-a6f7-7a3ec1155ae1" name="Default Changelist" comment="" />
+      <created>1568436632743</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1568436632743</updated>
+      <workItem from="1568436634809" duration="2324000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

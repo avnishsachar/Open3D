@@ -1,0 +1,436 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Point cloud outlier removal &mdash; Open3D latest (cf20af6) documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/open3d_logo.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Colored point cloud registration" href="colored_pointcloud_registration.html" />
+    <link rel="prev" title="Advanced" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Open3D
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest (cf20af6)
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">About Open3D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../compilation.html">Compiling from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../builddocs.html">Building Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute.html">Contributing to Open3D</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorial</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Basic/index.html">Basic</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Advanced</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Point cloud outlier removal</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prepare-input-data">Prepare input data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#select-down-sample">Select down sample</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statistical-outlier-removal">Statistical outlier removal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#radius-outlier-removal">Radius outlier removal</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="colored_pointcloud_registration.html">Colored point cloud registration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="global_registration.html">Global registration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fast_global_registration.html">Fast global registration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiway_registration.html">Multiway registration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rgbd_integration.html">RGBD integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="color_map_optimization.html">Color Map Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="customized_visualization.html">Customized visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="non_blocking_visualization.html">Non-blocking visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive_visualization.html">Interactive visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="headless_rendering.html">Headless rendering</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ReconstructionSystem/index.html">Reconstruction system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../C++/cplusplus_interface.html">C++ interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docker/index.html">Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.camera.html">open3d.camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.color_map.html">open3d.color_map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.geometry.html">open3d.geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.io.html">open3d.io</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.integration.html">open3d.integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.odometry.html">open3d.odometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.registration.html">open3d.registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.utility.html">open3d.utility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.visualization.html">open3d.visualization</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Open3D</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Advanced</a> &raquo;</li>
+        
+      <li>Point cloud outlier removal</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="point-cloud-outlier-removal">
+<span id="pointclud-outlier-removal"></span><h1>Point cloud outlier removal<a class="headerlink" href="#point-cloud-outlier-removal" title="Permalink to this headline">¶</a></h1>
+<p>When collecting data from scanning devices, it happens that the point cloud contains noise
+and artifact that one would like to remove. This tutorial address outlier removal feature.</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># examples/Python/Advanced/outlier_removal.py</span>
+
+<span class="kn">import</span> <span class="nn">open3d</span> <span class="kn">as</span> <span class="nn">o3d</span>
+
+
+<span class="k">def</span> <span class="nf">display_inlier_outlier</span><span class="p">(</span><span class="n">cloud</span><span class="p">,</span> <span class="n">ind</span><span class="p">):</span>
+    <span class="n">inlier_cloud</span> <span class="o">=</span> <span class="n">cloud</span><span class="o">.</span><span class="n">select_down_sample</span><span class="p">(</span><span class="n">ind</span><span class="p">)</span>
+    <span class="n">outlier_cloud</span> <span class="o">=</span> <span class="n">cloud</span><span class="o">.</span><span class="n">select_down_sample</span><span class="p">(</span><span class="n">ind</span><span class="p">,</span> <span class="n">invert</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Showing outliers (red) and inliers (gray): &quot;</span><span class="p">)</span>
+    <span class="n">outlier_cloud</span><span class="o">.</span><span class="n">paint_uniform_color</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="n">inlier_cloud</span><span class="o">.</span><span class="n">paint_uniform_color</span><span class="p">([</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">])</span>
+    <span class="n">o3d</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">draw_geometries</span><span class="p">([</span><span class="n">inlier_cloud</span><span class="p">,</span> <span class="n">outlier_cloud</span><span class="p">])</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Load a ply point cloud, print it, and render it&quot;</span><span class="p">)</span>
+    <span class="n">pcd</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_point_cloud</span><span class="p">(</span><span class="s2">&quot;../../TestData/ICP/cloud_bin_2.pcd&quot;</span><span class="p">)</span>
+    <span class="n">o3d</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">draw_geometries</span><span class="p">([</span><span class="n">pcd</span><span class="p">])</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Downsample the point cloud with a voxel of 0.02&quot;</span><span class="p">)</span>
+    <span class="n">voxel_down_pcd</span> <span class="o">=</span> <span class="n">pcd</span><span class="o">.</span><span class="n">voxel_down_sample</span><span class="p">(</span><span class="n">voxel_size</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>
+    <span class="n">o3d</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">draw_geometries</span><span class="p">([</span><span class="n">voxel_down_pcd</span><span class="p">])</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Every 5th points are selected&quot;</span><span class="p">)</span>
+    <span class="n">uni_down_pcd</span> <span class="o">=</span> <span class="n">pcd</span><span class="o">.</span><span class="n">uniform_down_sample</span><span class="p">(</span><span class="n">every_k_points</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">o3d</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">draw_geometries</span><span class="p">([</span><span class="n">uni_down_pcd</span><span class="p">])</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Statistical oulier removal&quot;</span><span class="p">)</span>
+    <span class="n">cl</span><span class="p">,</span> <span class="n">ind</span> <span class="o">=</span> <span class="n">voxel_down_pcd</span><span class="o">.</span><span class="n">remove_statistical_outlier</span><span class="p">(</span><span class="n">nb_neighbors</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+                                                        <span class="n">std_ratio</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+    <span class="n">display_inlier_outlier</span><span class="p">(</span><span class="n">voxel_down_pcd</span><span class="p">,</span> <span class="n">ind</span><span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Radius oulier removal&quot;</span><span class="p">)</span>
+    <span class="n">cl</span><span class="p">,</span> <span class="n">ind</span> <span class="o">=</span> <span class="n">voxel_down_pcd</span><span class="o">.</span><span class="n">remove_radius_outlier</span><span class="p">(</span><span class="n">nb_points</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+    <span class="n">display_inlier_outlier</span><span class="p">(</span><span class="n">voxel_down_pcd</span><span class="p">,</span> <span class="n">ind</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="prepare-input-data">
+<h2>Prepare input data<a class="headerlink" href="#prepare-input-data" title="Permalink to this headline">¶</a></h2>
+<p>A point cloud is loaded and downsampled using <code class="docutils literal notranslate"><span class="pre">voxel_downsample</span></code>.</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>22
+23
+24
+25
+26
+27
+28</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Load a ply point cloud, print it, and render it&quot;</span><span class="p">)</span>
+    <span class="n">pcd</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_point_cloud</span><span class="p">(</span><span class="s2">&quot;../../TestData/ICP/cloud_bin_2.pcd&quot;</span><span class="p">)</span>
+    <span class="n">o3d</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">draw_geometries</span><span class="p">([</span><span class="n">pcd</span><span class="p">])</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Downsample the point cloud with a voxel of 0.02&quot;</span><span class="p">)</span>
+    <span class="n">voxel_down_pcd</span> <span class="o">=</span> <span class="n">pcd</span><span class="o">.</span><span class="n">voxel_down_sample</span><span class="p">(</span><span class="n">voxel_size</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>
+    <span class="n">o3d</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">draw_geometries</span><span class="p">([</span><span class="n">voxel_down_pcd</span><span class="p">])</span>
+</pre></div>
+</td></tr></table></div>
+<a class="reference internal image-reference" href="../../_images/voxel_down_sample.png"><img alt="../../_images/voxel_down_sample.png" src="../../_images/voxel_down_sample.png" style="width: 400px;" /></a>
+<p>For comparison, <code class="docutils literal notranslate"><span class="pre">uniform_down_sample</span></code> can downsample point cloud by collecting every n-th points.</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>30
+31
+32</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Every 5th points are selected&quot;</span><span class="p">)</span>
+    <span class="n">uni_down_pcd</span> <span class="o">=</span> <span class="n">pcd</span><span class="o">.</span><span class="n">uniform_down_sample</span><span class="p">(</span><span class="n">every_k_points</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">o3d</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">draw_geometries</span><span class="p">([</span><span class="n">uni_down_pcd</span><span class="p">])</span>
+</pre></div>
+</td></tr></table></div>
+<a class="reference internal image-reference" href="../../_images/uniform_down_sample.png"><img alt="../../_images/uniform_down_sample.png" src="../../_images/uniform_down_sample.png" style="width: 400px;" /></a>
+</div>
+<div class="section" id="select-down-sample">
+<h2>Select down sample<a class="headerlink" href="#select-down-sample" title="Permalink to this headline">¶</a></h2>
+<p>The helper function uses <code class="docutils literal notranslate"><span class="pre">select_down_sample</span></code> that takes binary mask to output only the selected points.
+The selected points and the non-selected points are visualized.</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">display_inlier_outlier</span><span class="p">(</span><span class="n">cloud</span><span class="p">,</span> <span class="n">ind</span><span class="p">):</span>
+    <span class="n">inlier_cloud</span> <span class="o">=</span> <span class="n">cloud</span><span class="o">.</span><span class="n">select_down_sample</span><span class="p">(</span><span class="n">ind</span><span class="p">)</span>
+    <span class="n">outlier_cloud</span> <span class="o">=</span> <span class="n">cloud</span><span class="o">.</span><span class="n">select_down_sample</span><span class="p">(</span><span class="n">ind</span><span class="p">,</span> <span class="n">invert</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Showing outliers (red) and inliers (gray): &quot;</span><span class="p">)</span>
+    <span class="n">outlier_cloud</span><span class="o">.</span><span class="n">paint_uniform_color</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="n">inlier_cloud</span><span class="o">.</span><span class="n">paint_uniform_color</span><span class="p">([</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">])</span>
+    <span class="n">o3d</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">draw_geometries</span><span class="p">([</span><span class="n">inlier_cloud</span><span class="p">,</span> <span class="n">outlier_cloud</span><span class="p">])</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="statistical-outlier-removal">
+<h2>Statistical outlier removal<a class="headerlink" href="#statistical-outlier-removal" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>34
+35
+36
+37</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Statistical oulier removal&quot;</span><span class="p">)</span>
+    <span class="n">cl</span><span class="p">,</span> <span class="n">ind</span> <span class="o">=</span> <span class="n">voxel_down_pcd</span><span class="o">.</span><span class="n">remove_statistical_outlier</span><span class="p">(</span><span class="n">nb_neighbors</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+                                                        <span class="n">std_ratio</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+    <span class="n">display_inlier_outlier</span><span class="p">(</span><span class="n">voxel_down_pcd</span><span class="p">,</span> <span class="n">ind</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p><code class="docutils literal notranslate"><span class="pre">statistical_outlier_removal</span></code> removes points that are further away from their neighbors compared to the average for the point cloud. It takes two input parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">nb_neighbors</span></code> allows to specify how many neighbors are taken into account in order to calculate the average distance for a given point.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">std_ratio</span></code> allows to set the threshold level based on the standard deviation of the average distances across the point cloud. The lower this number the more aggressive the filter will be.</p></li>
+</ul>
+</div></blockquote>
+<a class="reference internal image-reference" href="../../_images/statistical_outlier_removal.png"><img alt="../../_images/statistical_outlier_removal.png" src="../../_images/statistical_outlier_removal.png" style="width: 400px;" /></a>
+</div>
+<div class="section" id="radius-outlier-removal">
+<h2>Radius outlier removal<a class="headerlink" href="#radius-outlier-removal" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>40
+41
+42</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Radius oulier removal&quot;</span><span class="p">)</span>
+    <span class="n">cl</span><span class="p">,</span> <span class="n">ind</span> <span class="o">=</span> <span class="n">voxel_down_pcd</span><span class="o">.</span><span class="n">remove_radius_outlier</span><span class="p">(</span><span class="n">nb_points</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+    <span class="n">display_inlier_outlier</span><span class="p">(</span><span class="n">voxel_down_pcd</span><span class="p">,</span> <span class="n">ind</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p><code class="docutils literal notranslate"><span class="pre">radius_outlier_removal</span></code> removes points that have few neighbors in a given sphere around them. Two parameters can be used to tune the filter to your data:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">nb_points</span></code> lets you pick the minimum amount of points that the sphere should contain</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">radius</span></code> defines the radius of the sphere that will be used for counting the neighbors.</p></li>
+</ul>
+</div></blockquote>
+<a class="reference internal image-reference" href="../../_images/radius_outlier_removal.png"><img alt="../../_images/radius_outlier_removal.png" src="../../_images/radius_outlier_removal.png" style="width: 400px;" /></a>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="colored_pointcloud_registration.html" class="btn btn-neutral float-right" title="Colored point cloud registration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Advanced" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018 - 2019, www.open3d.org
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+<span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Docs version</span>
+    latest (cf20af6)
+    <span class="fa fa-caret-down"></span>
+</span>
+
+<!-- A hack to include an external page to get around CORS policy -->
+<!-- https://stackoverflow.com/a/15250208/1255535 -->
+<div class="rst-other-versions">
+    <dl>
+    <dt>Versions</dt>
+        <dd><ul>
+            <script src="http://www.open3d.org/docs/versions.js"></script>
+        </ul></dd>
+    </dl>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

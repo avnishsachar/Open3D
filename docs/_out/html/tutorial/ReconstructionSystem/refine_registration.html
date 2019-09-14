@@ -1,0 +1,572 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Refine registration &mdash; Open3D latest (cf20af6) documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/open3d_logo.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Integrate scene" href="integrate_scene.html" />
+    <link rel="prev" title="Register fragments" href="register_fragments.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Open3D
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest (cf20af6)
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">About Open3D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../compilation.html">Compiling from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../builddocs.html">Building Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute.html">Contributing to Open3D</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorial</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Basic/index.html">Basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Advanced/index.html">Advanced</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reconstruction system</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="system_overview.html">System overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="make_fragments.html">Make fragments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="register_fragments.html">Register fragments</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Refine registration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#input-arguments">Input arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fine-grained-registration">Fine-grained registration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multiway-registration">Multiway registration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main-registration-loop">Main registration loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#results">Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="integrate_scene.html">Integrate scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="capture_your_own_dataset.html">Capture your own dataset</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../C++/cplusplus_interface.html">C++ interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docker/index.html">Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.camera.html">open3d.camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.color_map.html">open3d.color_map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.geometry.html">open3d.geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.io.html">open3d.io</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.integration.html">open3d.integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.odometry.html">open3d.odometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.registration.html">open3d.registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.utility.html">open3d.utility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.visualization.html">open3d.visualization</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Open3D</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Reconstruction system</a> &raquo;</li>
+        
+      <li>Refine registration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="refine-registration">
+<span id="reconstruction-system-refine-registration"></span><h1>Refine registration<a class="headerlink" href="#refine-registration" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="input-arguments">
+<h2>Input arguments<a class="headerlink" href="#input-arguments" title="Permalink to this headline">¶</a></h2>
+<p>This script runs with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">run_system.py</span> <span class="pre">[config]</span> <span class="pre">--refine</span></code>. In <code class="docutils literal notranslate"><span class="pre">[config]</span></code>, <code class="docutils literal notranslate"><span class="pre">[&quot;path_dataset&quot;]</span></code> should have subfolders <code class="docutils literal notranslate"><span class="pre">fragments</span></code> which stores fragments in <code class="docutils literal notranslate"><span class="pre">.ply</span></code> files and a pose graph in a <code class="docutils literal notranslate"><span class="pre">.json</span></code> file.</p>
+<p>The main function runs <code class="docutils literal notranslate"><span class="pre">local_refinement</span></code> and <code class="docutils literal notranslate"><span class="pre">optimize_posegraph_for_scene</span></code>. The first function performs pairwise registration on the pairs detected by <a class="reference internal" href="register_fragments.html#reconstruction-system-register-fragments"><span class="std std-ref">Register fragments</span></a>. The second function performs multiway registration.</p>
+</div>
+<div class="section" id="fine-grained-registration">
+<h2>Fine-grained registration<a class="headerlink" href="#fine-grained-registration" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># examples/Python/ReconstructionSystem/refine_registration.py</span>
+<span class="k">def</span> <span class="nf">multiscale_icp</span><span class="p">(</span><span class="n">source</span><span class="p">,</span>
+                   <span class="n">target</span><span class="p">,</span>
+                   <span class="n">voxel_size</span><span class="p">,</span>
+                   <span class="n">max_iter</span><span class="p">,</span>
+                   <span class="n">config</span><span class="p">,</span>
+                   <span class="n">init_transformation</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">4</span><span class="p">)):</span>
+    <span class="n">current_transformation</span> <span class="o">=</span> <span class="n">init_transformation</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">scale</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">max_iter</span><span class="p">))):</span>  <span class="c1"># multi-scale approach</span>
+        <span class="nb">iter</span> <span class="o">=</span> <span class="n">max_iter</span><span class="p">[</span><span class="n">scale</span><span class="p">]</span>
+        <span class="n">distance_threshold</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;voxel_size&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1.4</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;voxel_size </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">voxel_size</span><span class="p">[</span><span class="n">scale</span><span class="p">])</span>
+        <span class="n">source_down</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">voxel_down_sample</span><span class="p">(</span><span class="n">voxel_size</span><span class="p">[</span><span class="n">scale</span><span class="p">])</span>
+        <span class="n">target_down</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">voxel_down_sample</span><span class="p">(</span><span class="n">voxel_size</span><span class="p">[</span><span class="n">scale</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;icp_method&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;point_to_point&quot;</span><span class="p">:</span>
+            <span class="n">result_icp</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">registration_icp</span><span class="p">(</span>
+                <span class="n">source_down</span><span class="p">,</span> <span class="n">target_down</span><span class="p">,</span> <span class="n">distance_threshold</span><span class="p">,</span>
+                <span class="n">current_transformation</span><span class="p">,</span>
+                <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">TransformationEstimationPointToPoint</span><span class="p">(),</span>
+                <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">ICPConvergenceCriteria</span><span class="p">(</span><span class="n">max_iteration</span><span class="o">=</span><span class="nb">iter</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">source_down</span><span class="o">.</span><span class="n">estimate_normals</span><span class="p">(</span>
+                <span class="n">o3d</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">KDTreeSearchParamHybrid</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="n">voxel_size</span><span class="p">[</span><span class="n">scale</span><span class="p">]</span> <span class="o">*</span>
+                                                     <span class="mf">2.0</span><span class="p">,</span>
+                                                     <span class="n">max_nn</span><span class="o">=</span><span class="mi">30</span><span class="p">))</span>
+            <span class="n">target_down</span><span class="o">.</span><span class="n">estimate_normals</span><span class="p">(</span>
+                <span class="n">o3d</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">KDTreeSearchParamHybrid</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="n">voxel_size</span><span class="p">[</span><span class="n">scale</span><span class="p">]</span> <span class="o">*</span>
+                                                     <span class="mf">2.0</span><span class="p">,</span>
+                                                     <span class="n">max_nn</span><span class="o">=</span><span class="mi">30</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;icp_method&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;point_to_plane&quot;</span><span class="p">:</span>
+                <span class="n">result_icp</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">registration_icp</span><span class="p">(</span>
+                    <span class="n">source_down</span><span class="p">,</span> <span class="n">target_down</span><span class="p">,</span> <span class="n">distance_threshold</span><span class="p">,</span>
+                    <span class="n">current_transformation</span><span class="p">,</span>
+                    <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">TransformationEstimationPointToPlane</span><span class="p">(),</span>
+                    <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">ICPConvergenceCriteria</span><span class="p">(</span><span class="n">max_iteration</span><span class="o">=</span><span class="nb">iter</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;icp_method&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span>
+                <span class="n">result_icp</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">registration_colored_icp</span><span class="p">(</span>
+                    <span class="n">source_down</span><span class="p">,</span> <span class="n">target_down</span><span class="p">,</span> <span class="n">voxel_size</span><span class="p">[</span><span class="n">scale</span><span class="p">],</span>
+                    <span class="n">current_transformation</span><span class="p">,</span>
+                    <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">ICPConvergenceCriteria</span><span class="p">(</span>
+                        <span class="n">relative_fitness</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span>
+                        <span class="n">relative_rmse</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span>
+                        <span class="n">max_iteration</span><span class="o">=</span><span class="nb">iter</span><span class="p">))</span>
+        <span class="n">current_transformation</span> <span class="o">=</span> <span class="n">result_icp</span><span class="o">.</span><span class="n">transformation</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">max_iter</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">information_matrix</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">get_information_matrix_from_point_clouds</span><span class="p">(</span>
+                <span class="n">source_down</span><span class="p">,</span> <span class="n">target_down</span><span class="p">,</span> <span class="n">voxel_size</span><span class="p">[</span><span class="n">scale</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1.4</span><span class="p">,</span>
+                <span class="n">result_icp</span><span class="o">.</span><span class="n">transformation</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;debug_mode&quot;</span><span class="p">]:</span>
+        <span class="n">draw_registration_result_original_color</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span>
+                                                <span class="n">result_icp</span><span class="o">.</span><span class="n">transformation</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">result_icp</span><span class="o">.</span><span class="n">transformation</span><span class="p">,</span> <span class="n">information_matrix</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>Two options are given for the fine-grained registration. The <code class="docutils literal notranslate"><span class="pre">color</span></code> option is recommended since it uses color information to prevent drift. See <a class="reference internal" href="../reference.html#park2017" id="id1"><span>[Park2017]</span></a> for details.</p>
+</div>
+<div class="section" id="multiway-registration">
+<h2>Multiway registration<a class="headerlink" href="#multiway-registration" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># examples/Python/ReconstructionSystem/refine_registration.py</span>
+<span class="k">def</span> <span class="nf">update_posegrph_for_scene</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">transformation</span><span class="p">,</span> <span class="n">information</span><span class="p">,</span> <span class="n">odometry</span><span class="p">,</span>
+                              <span class="n">pose_graph</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="n">s</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># odometry case</span>
+        <span class="n">odometry</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">transformation</span><span class="p">,</span> <span class="n">odometry</span><span class="p">)</span>
+        <span class="n">odometry_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">odometry</span><span class="p">)</span>
+        <span class="n">pose_graph</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">PoseGraphNode</span><span class="p">(</span><span class="n">odometry_inv</span><span class="p">))</span>
+        <span class="n">pose_graph</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">PoseGraphEdge</span><span class="p">(</span><span class="n">s</span><span class="p">,</span>
+                                           <span class="n">t</span><span class="p">,</span>
+                                           <span class="n">transformation</span><span class="p">,</span>
+                                           <span class="n">information</span><span class="p">,</span>
+                                           <span class="n">uncertain</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>  <span class="c1"># loop closure case</span>
+        <span class="n">pose_graph</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">PoseGraphEdge</span><span class="p">(</span><span class="n">s</span><span class="p">,</span>
+                                           <span class="n">t</span><span class="p">,</span>
+                                           <span class="n">transformation</span><span class="p">,</span>
+                                           <span class="n">information</span><span class="p">,</span>
+                                           <span class="n">uncertain</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">odometry</span><span class="p">,</span> <span class="n">pose_graph</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>This script uses the technique demonstrated in <a class="reference internal" href="../Advanced/multiway_registration.html#multiway-registration"><span class="std std-ref">Multiway registration</span></a>. Function <code class="docutils literal notranslate"><span class="pre">update_posegrph_for_refined_scene</span></code> builds a pose graph for multiway registration of all fragments. Each graph node represents a fragment and its pose which transforms the geometry to the global space.</p>
+<p>Once a pose graph is built, function <code class="docutils literal notranslate"><span class="pre">optimize_posegraph_for_scene</span></code> is called for multiway registration.</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>52
+53
+54
+55
+56
+57
+58
+59
+60</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># examples/Python/ReconstructionSystem/optimize_posegraph.py</span>
+<span class="k">def</span> <span class="nf">optimize_posegraph_for_refined_scene</span><span class="p">(</span><span class="n">path_dataset</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+    <span class="n">pose_graph_name</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">path_dataset</span><span class="p">,</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;template_refined_posegraph&quot;</span><span class="p">])</span>
+    <span class="n">pose_graph_optimized_name</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span>
+        <span class="n">path_dataset</span><span class="p">,</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;template_refined_posegraph_optimized&quot;</span><span class="p">])</span>
+    <span class="n">run_posegraph_optimization</span><span class="p">(</span><span class="n">pose_graph_name</span><span class="p">,</span> <span class="n">pose_graph_optimized_name</span><span class="p">,</span>
+            <span class="n">max_correspondence_distance</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;voxel_size&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1.4</span><span class="p">,</span>
+            <span class="n">preference_loop_closure</span> <span class="o">=</span> \
+            <span class="n">config</span><span class="p">[</span><span class="s2">&quot;preference_loop_closure_registration&quot;</span><span class="p">])</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="main-registration-loop">
+<h2>Main registration loop<a class="headerlink" href="#main-registration-loop" title="Permalink to this headline">¶</a></h2>
+<p>The function <code class="docutils literal notranslate"><span class="pre">make_posegraph_for_refined_scene</span></code> below calls all the functions introduced above.</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># examples/Python/ReconstructionSystem/refine_registration.py</span>
+<span class="k">def</span> <span class="nf">make_posegraph_for_refined_scene</span><span class="p">(</span><span class="n">ply_file_names</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+    <span class="n">pose_graph</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_pose_graph</span><span class="p">(</span>
+        <span class="n">join</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;path_dataset&quot;</span><span class="p">],</span>
+             <span class="n">config</span><span class="p">[</span><span class="s2">&quot;template_global_posegraph_optimized&quot;</span><span class="p">]))</span>
+
+    <span class="n">n_files</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ply_file_names</span><span class="p">)</span>
+    <span class="n">matching_results</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">pose_graph</span><span class="o">.</span><span class="n">edges</span><span class="p">:</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">edge</span><span class="o">.</span><span class="n">source_node_id</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">edge</span><span class="o">.</span><span class="n">target_node_id</span>
+        <span class="n">matching_results</span><span class="p">[</span><span class="n">s</span> <span class="o">*</span> <span class="n">n_files</span> <span class="o">+</span> <span class="n">t</span><span class="p">]</span> <span class="o">=</span> \
+                <span class="n">matching_result</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">edge</span><span class="o">.</span><span class="n">transformation</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;python_multi_threading&quot;</span><span class="p">]:</span>
+        <span class="kn">from</span> <span class="nn">joblib</span> <span class="kn">import</span> <span class="n">Parallel</span><span class="p">,</span> <span class="n">delayed</span>
+        <span class="kn">import</span> <span class="nn">multiprocessing</span>
+        <span class="kn">import</span> <span class="nn">subprocess</span>
+        <span class="n">MAX_THREAD</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">multiprocessing</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">(),</span>
+                         <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pose_graph</span><span class="o">.</span><span class="n">edges</span><span class="p">),</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">MAX_THREAD</span><span class="p">)(</span>
+            <span class="n">delayed</span><span class="p">(</span><span class="n">register_point_cloud_pair</span><span class="p">)(</span>
+                <span class="n">ply_file_names</span><span class="p">,</span> <span class="n">matching_results</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">.</span><span class="n">s</span><span class="p">,</span> <span class="n">matching_results</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">.</span><span class="n">t</span><span class="p">,</span>
+                <span class="n">matching_results</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">.</span><span class="n">transformation</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">matching_results</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">matching_results</span><span class="p">):</span>
+            <span class="n">matching_results</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">.</span><span class="n">transformation</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">matching_results</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">.</span><span class="n">information</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">matching_results</span><span class="p">:</span>
+            <span class="p">(</span><span class="n">matching_results</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">.</span><span class="n">transformation</span><span class="p">,</span>
+                    <span class="n">matching_results</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">.</span><span class="n">information</span><span class="p">)</span> <span class="o">=</span> \
+                    <span class="n">register_point_cloud_pair</span><span class="p">(</span><span class="n">ply_file_names</span><span class="p">,</span>
+                    <span class="n">matching_results</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">.</span><span class="n">s</span><span class="p">,</span> <span class="n">matching_results</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">.</span><span class="n">t</span><span class="p">,</span>
+                    <span class="n">matching_results</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">.</span><span class="n">transformation</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+
+    <span class="n">pose_graph_new</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">PoseGraph</span><span class="p">()</span>
+    <span class="n">odometry</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">pose_graph_new</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">PoseGraphNode</span><span class="p">(</span><span class="n">odometry</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">matching_results</span><span class="p">:</span>
+        <span class="p">(</span><span class="n">odometry</span><span class="p">,</span> <span class="n">pose_graph_new</span><span class="p">)</span> <span class="o">=</span> <span class="n">update_posegrph_for_scene</span><span class="p">(</span>
+            <span class="n">matching_results</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">.</span><span class="n">s</span><span class="p">,</span> <span class="n">matching_results</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">.</span><span class="n">t</span><span class="p">,</span>
+            <span class="n">matching_results</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">.</span><span class="n">transformation</span><span class="p">,</span> <span class="n">matching_results</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">.</span><span class="n">information</span><span class="p">,</span>
+            <span class="n">odometry</span><span class="p">,</span> <span class="n">pose_graph_new</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">pose_graph_new</span><span class="p">)</span>
+    <span class="n">o3d</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">write_pose_graph</span><span class="p">(</span>
+        <span class="n">join</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;path_dataset&quot;</span><span class="p">],</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;template_refined_posegraph&quot;</span><span class="p">]),</span>
+        <span class="n">pose_graph_new</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>The main workflow is: pairwise local refinement -&gt; multiway registration.</p>
+</div>
+<div class="section" id="results">
+<h2>Results<a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h2>
+<p>The following is messages from pose graph optimization.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>GlobalOptimizationLM<span class="o">]</span> Optimizing PoseGraph having <span class="m">14</span> nodes and <span class="m">35</span> edges.
+Line process weight : <span class="m">789</span>.730200
+<span class="o">[</span>Initial     <span class="o">]</span> residual : <span class="m">1</span>.208286e+04, lambda : <span class="m">1</span>.706306e+01
+<span class="o">[</span>Iteration <span class="m">00</span><span class="o">]</span> residual : <span class="m">2</span>.410383e+03, valid edges : <span class="m">22</span>, <span class="nb">time</span> : <span class="m">0</span>.000 sec.
+<span class="o">[</span>Iteration <span class="m">01</span><span class="o">]</span> residual : <span class="m">8</span>.127856e+01, valid edges : <span class="m">22</span>, <span class="nb">time</span> : <span class="m">0</span>.000 sec.
+<span class="o">[</span>Iteration <span class="m">02</span><span class="o">]</span> residual : <span class="m">8</span>.031355e+01, valid edges : <span class="m">22</span>, <span class="nb">time</span> : <span class="m">0</span>.000 sec.
+Delta.norm<span class="o">()</span> &lt; <span class="m">1</span>.000000e-06 * <span class="o">(</span>x.norm<span class="o">()</span> + <span class="m">1</span>.000000e-06<span class="o">)</span>
+<span class="o">[</span>GlobalOptimizationLM<span class="o">]</span> total <span class="nb">time</span> : <span class="m">0</span>.001 sec.
+<span class="o">[</span>GlobalOptimizationLM<span class="o">]</span> Optimizing PoseGraph having <span class="m">14</span> nodes and <span class="m">35</span> edges.
+Line process weight : <span class="m">789</span>.730200
+<span class="o">[</span>Initial     <span class="o">]</span> residual : <span class="m">8</span>.031355e+01, lambda : <span class="m">1</span>.716826e+01
+Delta.norm<span class="o">()</span> &lt; <span class="m">1</span>.000000e-06 * <span class="o">(</span>x.norm<span class="o">()</span> + <span class="m">1</span>.000000e-06<span class="o">)</span>
+<span class="o">[</span>GlobalOptimizationLM<span class="o">]</span> total <span class="nb">time</span> : <span class="m">0</span>.000 sec.
+CompensateReferencePoseGraphNode : reference : <span class="m">0</span>
+</pre></div>
+</div>
+<p>There are 14 fragments and 52 valid matching pairs between fragments. After 23 iteration, 11 edges are detected to be false positive. After they are pruned, pose graph optimization runs again to achieve tight alignment.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="integrate_scene.html" class="btn btn-neutral float-right" title="Integrate scene" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="register_fragments.html" class="btn btn-neutral float-left" title="Register fragments" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018 - 2019, www.open3d.org
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+<span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Docs version</span>
+    latest (cf20af6)
+    <span class="fa fa-caret-down"></span>
+</span>
+
+<!-- A hack to include an external page to get around CORS policy -->
+<!-- https://stackoverflow.com/a/15250208/1255535 -->
+<div class="rst-other-versions">
+    <dl>
+    <dt>Versions</dt>
+        <dd><ul>
+            <script src="http://www.open3d.org/docs/versions.js"></script>
+        </ul></dd>
+    </dl>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

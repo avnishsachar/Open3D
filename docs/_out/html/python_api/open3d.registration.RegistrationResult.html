@@ -1,0 +1,348 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>open3d.registration.RegistrationResult &mdash; Open3D latest (cf20af6) documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/open3d_logo.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="open3d.registration.TransformationEstimation" href="open3d.registration.TransformationEstimation.html" />
+    <link rel="prev" title="open3d.registration.RANSACConvergenceCriteria" href="open3d.registration.RANSACConvergenceCriteria.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Open3D
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest (cf20af6)
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">About Open3D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compilation.html">Compiling from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../builddocs.html">Building Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute.html">Contributing to Open3D</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorial</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/Basic/index.html">Basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/Advanced/index.html">Advanced</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/ReconstructionSystem/index.html">Reconstruction system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/C++/cplusplus_interface.html">C++ interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/docker/index.html">Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/reference.html">Reference</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python API</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="open3d.camera.html">open3d.camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open3d.color_map.html">open3d.color_map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open3d.geometry.html">open3d.geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open3d.io.html">open3d.io</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open3d.integration.html">open3d.integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open3d.odometry.html">open3d.odometry</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="open3d.registration.html">open3d.registration</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.CorrespondenceChecker.html">CorrespondenceChecker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.CorrespondenceCheckerBasedOnDistance.html">CorrespondenceCheckerBasedOnDistance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.CorrespondenceCheckerBasedOnEdgeLength.html">CorrespondenceCheckerBasedOnEdgeLength</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.CorrespondenceCheckerBasedOnNormal.html">CorrespondenceCheckerBasedOnNormal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.FastGlobalRegistrationOption.html">FastGlobalRegistrationOption</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.Feature.html">Feature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.GlobalOptimizationConvergenceCriteria.html">GlobalOptimizationConvergenceCriteria</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.GlobalOptimizationGaussNewton.html">GlobalOptimizationGaussNewton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.GlobalOptimizationLevenbergMarquardt.html">GlobalOptimizationLevenbergMarquardt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.GlobalOptimizationMethod.html">GlobalOptimizationMethod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.GlobalOptimizationOption.html">GlobalOptimizationOption</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.ICPConvergenceCriteria.html">ICPConvergenceCriteria</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.PoseGraph.html">PoseGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.PoseGraphEdge.html">PoseGraphEdge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.PoseGraphEdgeVector.html">PoseGraphEdgeVector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.PoseGraphNode.html">PoseGraphNode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.PoseGraphNodeVector.html">PoseGraphNodeVector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.RANSACConvergenceCriteria.html">RANSACConvergenceCriteria</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">RegistrationResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.TransformationEstimation.html">TransformationEstimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.TransformationEstimationPointToPlane.html">TransformationEstimationPointToPlane</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.TransformationEstimationPointToPoint.html">TransformationEstimationPointToPoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.compute_fpfh_feature.html">compute_fpfh_feature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.evaluate_registration.html">evaluate_registration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.get_information_matrix_from_point_clouds.html">get_information_matrix_from_point_clouds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.global_optimization.html">global_optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.registration_colored_icp.html">registration_colored_icp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.registration_fast_based_on_feature_matching.html">registration_fast_based_on_feature_matching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.registration_icp.html">registration_icp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.registration_ransac_based_on_correspondence.html">registration_ransac_based_on_correspondence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.registration_ransac_based_on_feature_matching.html">registration_ransac_based_on_feature_matching</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="open3d.utility.html">open3d.utility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open3d.visualization.html">open3d.visualization</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Open3D</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="open3d.registration.html">open3d.registration</a> &raquo;</li>
+        
+      <li>open3d.registration.RegistrationResult</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="open3d-registration-registrationresult">
+<h1>open3d.registration.RegistrationResult<a class="headerlink" href="#open3d-registration-registrationresult" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="open3d.registration.RegistrationResult">
+<em class="property">class </em><code class="sig-prename descclassname">open3d.registration.</code><code class="sig-name descname">RegistrationResult</code><a class="headerlink" href="#open3d.registration.RegistrationResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class that contains the registration results.</p>
+<dl class="method">
+<dt id="open3d.registration.RegistrationResult.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#open3d.registration.RegistrationResult.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>__init__(self: open3d.registration.RegistrationResult) -&gt; None</p></li>
+</ol>
+<p>Default constructor</p>
+<ol class="arabic simple" start="2">
+<li><p>__init__(self: open3d.registration.RegistrationResult, arg0: open3d.registration.RegistrationResult) -&gt; None</p></li>
+</ol>
+<p>Copy constructor</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="open3d.registration.RegistrationResult.correspondence_set">
+<em class="property">property </em><code class="sig-name descname">correspondence_set</code><a class="headerlink" href="#open3d.registration.RegistrationResult.correspondence_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Correspondence set between source and target point cloud.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">x</span> <span class="pre">2</span></code> int numpy array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="open3d.registration.RegistrationResult.fitness">
+<em class="property">property </em><code class="sig-name descname">fitness</code><a class="headerlink" href="#open3d.registration.RegistrationResult.fitness" title="Permalink to this definition">¶</a></dt>
+<dd><p>The overlapping area (# of inlier correspondences / # of points in target). Higher is better.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="open3d.registration.RegistrationResult.inlier_rmse">
+<em class="property">property </em><code class="sig-name descname">inlier_rmse</code><a class="headerlink" href="#open3d.registration.RegistrationResult.inlier_rmse" title="Permalink to this definition">¶</a></dt>
+<dd><p>RMSE of all inlier correspondences. Lower is better.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="open3d.registration.RegistrationResult.transformation">
+<em class="property">property </em><code class="sig-name descname">transformation</code><a class="headerlink" href="#open3d.registration.RegistrationResult.transformation" title="Permalink to this definition">¶</a></dt>
+<dd><p>The estimated transformation matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">4</span> <span class="pre">x</span> <span class="pre">4</span></code> float64 numpy array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="open3d.registration.TransformationEstimation.html" class="btn btn-neutral float-right" title="open3d.registration.TransformationEstimation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="open3d.registration.RANSACConvergenceCriteria.html" class="btn btn-neutral float-left" title="open3d.registration.RANSACConvergenceCriteria" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018 - 2019, www.open3d.org
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+<span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Docs version</span>
+    latest (cf20af6)
+    <span class="fa fa-caret-down"></span>
+</span>
+
+<!-- A hack to include an external page to get around CORS policy -->
+<!-- https://stackoverflow.com/a/15250208/1255535 -->
+<div class="rst-other-versions">
+    <dl>
+    <dt>Versions</dt>
+        <dd><ul>
+            <script src="http://www.open3d.org/docs/versions.js"></script>
+        </ul></dd>
+    </dl>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

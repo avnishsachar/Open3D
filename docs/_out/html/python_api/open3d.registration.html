@@ -1,0 +1,395 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>open3d.registration &mdash; Open3D latest (cf20af6) documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/open3d_logo.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="open3d.registration.CorrespondenceChecker" href="open3d.registration.CorrespondenceChecker.html" />
+    <link rel="prev" title="open3d.odometry.compute_rgbd_odometry" href="open3d.odometry.compute_rgbd_odometry.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Open3D
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest (cf20af6)
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">About Open3D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compilation.html">Compiling from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../builddocs.html">Building Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute.html">Contributing to Open3D</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorial</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/Basic/index.html">Basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/Advanced/index.html">Advanced</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/ReconstructionSystem/index.html">Reconstruction system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/C++/cplusplus_interface.html">C++ interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/docker/index.html">Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/reference.html">Reference</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python API</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="open3d.camera.html">open3d.camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open3d.color_map.html">open3d.color_map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open3d.geometry.html">open3d.geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open3d.io.html">open3d.io</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open3d.integration.html">open3d.integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open3d.odometry.html">open3d.odometry</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">open3d.registration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.CorrespondenceChecker.html">CorrespondenceChecker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.CorrespondenceCheckerBasedOnDistance.html">CorrespondenceCheckerBasedOnDistance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.CorrespondenceCheckerBasedOnEdgeLength.html">CorrespondenceCheckerBasedOnEdgeLength</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.CorrespondenceCheckerBasedOnNormal.html">CorrespondenceCheckerBasedOnNormal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.FastGlobalRegistrationOption.html">FastGlobalRegistrationOption</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.Feature.html">Feature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.GlobalOptimizationConvergenceCriteria.html">GlobalOptimizationConvergenceCriteria</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.GlobalOptimizationGaussNewton.html">GlobalOptimizationGaussNewton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.GlobalOptimizationLevenbergMarquardt.html">GlobalOptimizationLevenbergMarquardt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.GlobalOptimizationMethod.html">GlobalOptimizationMethod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.GlobalOptimizationOption.html">GlobalOptimizationOption</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.ICPConvergenceCriteria.html">ICPConvergenceCriteria</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.PoseGraph.html">PoseGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.PoseGraphEdge.html">PoseGraphEdge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.PoseGraphEdgeVector.html">PoseGraphEdgeVector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.PoseGraphNode.html">PoseGraphNode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.PoseGraphNodeVector.html">PoseGraphNodeVector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.RANSACConvergenceCriteria.html">RANSACConvergenceCriteria</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.RegistrationResult.html">RegistrationResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.TransformationEstimation.html">TransformationEstimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.TransformationEstimationPointToPlane.html">TransformationEstimationPointToPlane</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.TransformationEstimationPointToPoint.html">TransformationEstimationPointToPoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.compute_fpfh_feature.html">compute_fpfh_feature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.evaluate_registration.html">evaluate_registration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.get_information_matrix_from_point_clouds.html">get_information_matrix_from_point_clouds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.global_optimization.html">global_optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.registration_colored_icp.html">registration_colored_icp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.registration_fast_based_on_feature_matching.html">registration_fast_based_on_feature_matching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.registration_icp.html">registration_icp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.registration_ransac_based_on_correspondence.html">registration_ransac_based_on_correspondence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open3d.registration.registration_ransac_based_on_feature_matching.html">registration_ransac_based_on_feature_matching</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="open3d.utility.html">open3d.utility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open3d.visualization.html">open3d.visualization</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Open3D</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>open3d.registration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="open3d-registration">
+<h1>open3d.registration<a class="headerlink" href="#open3d-registration" title="Permalink to this headline">¶</a></h1>
+<p><strong>Classes</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="open3d.registration.CorrespondenceChecker.html#open3d.registration.CorrespondenceChecker" title="open3d.registration.CorrespondenceChecker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CorrespondenceChecker</span></code></a></p></td>
+<td><p>Base class that checks if two (small) point clouds can be aligned.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="open3d.registration.CorrespondenceCheckerBasedOnDistance.html#open3d.registration.CorrespondenceCheckerBasedOnDistance" title="open3d.registration.CorrespondenceCheckerBasedOnDistance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CorrespondenceCheckerBasedOnDistance</span></code></a></p></td>
+<td><p>Class to check if aligned point clouds are close (less than specified threshold).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="open3d.registration.CorrespondenceCheckerBasedOnEdgeLength.html#open3d.registration.CorrespondenceCheckerBasedOnEdgeLength" title="open3d.registration.CorrespondenceCheckerBasedOnEdgeLength"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CorrespondenceCheckerBasedOnEdgeLength</span></code></a></p></td>
+<td><p>Check if two point clouds build the polygons with similar edge lengths.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="open3d.registration.CorrespondenceCheckerBasedOnNormal.html#open3d.registration.CorrespondenceCheckerBasedOnNormal" title="open3d.registration.CorrespondenceCheckerBasedOnNormal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CorrespondenceCheckerBasedOnNormal</span></code></a></p></td>
+<td><p>Class to check if two aligned point clouds have similar normals.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="open3d.registration.FastGlobalRegistrationOption.html#open3d.registration.FastGlobalRegistrationOption" title="open3d.registration.FastGlobalRegistrationOption"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FastGlobalRegistrationOption</span></code></a></p></td>
+<td><p>Options for FastGlobalRegistration.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="open3d.registration.Feature.html#open3d.registration.Feature" title="open3d.registration.Feature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Feature</span></code></a></p></td>
+<td><p>Class to store featrues for registration.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="open3d.registration.GlobalOptimizationConvergenceCriteria.html#open3d.registration.GlobalOptimizationConvergenceCriteria" title="open3d.registration.GlobalOptimizationConvergenceCriteria"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GlobalOptimizationConvergenceCriteria</span></code></a></p></td>
+<td><p>Convergence criteria of GlobalOptimization.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="open3d.registration.GlobalOptimizationGaussNewton.html#open3d.registration.GlobalOptimizationGaussNewton" title="open3d.registration.GlobalOptimizationGaussNewton"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GlobalOptimizationGaussNewton</span></code></a></p></td>
+<td><p>Global optimization with Gauss-Newton algorithm.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="open3d.registration.GlobalOptimizationLevenbergMarquardt.html#open3d.registration.GlobalOptimizationLevenbergMarquardt" title="open3d.registration.GlobalOptimizationLevenbergMarquardt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GlobalOptimizationLevenbergMarquardt</span></code></a></p></td>
+<td><p>Global optimization with Levenberg-Marquardt algorithm.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="open3d.registration.GlobalOptimizationMethod.html#open3d.registration.GlobalOptimizationMethod" title="open3d.registration.GlobalOptimizationMethod"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GlobalOptimizationMethod</span></code></a></p></td>
+<td><p>Base class for global optimization method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="open3d.registration.GlobalOptimizationOption.html#open3d.registration.GlobalOptimizationOption" title="open3d.registration.GlobalOptimizationOption"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GlobalOptimizationOption</span></code></a></p></td>
+<td><p>Option for GlobalOptimization.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="open3d.registration.ICPConvergenceCriteria.html#open3d.registration.ICPConvergenceCriteria" title="open3d.registration.ICPConvergenceCriteria"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ICPConvergenceCriteria</span></code></a></p></td>
+<td><p>Class that defines the convergence criteria of ICP.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="open3d.registration.PoseGraph.html#open3d.registration.PoseGraph" title="open3d.registration.PoseGraph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PoseGraph</span></code></a></p></td>
+<td><p>Data structure defining the pose graph.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="open3d.registration.PoseGraphEdge.html#open3d.registration.PoseGraphEdge" title="open3d.registration.PoseGraphEdge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PoseGraphEdge</span></code></a></p></td>
+<td><p>Edge of <code class="docutils literal notranslate"><span class="pre">PostGraph</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="open3d.registration.PoseGraphEdgeVector.html#open3d.registration.PoseGraphEdgeVector" title="open3d.registration.PoseGraphEdgeVector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PoseGraphEdgeVector</span></code></a></p></td>
+<td><p>Vector of PoseGraphEdge</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="open3d.registration.PoseGraphNode.html#open3d.registration.PoseGraphNode" title="open3d.registration.PoseGraphNode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PoseGraphNode</span></code></a></p></td>
+<td><p>Node of <code class="docutils literal notranslate"><span class="pre">PostGraph</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="open3d.registration.PoseGraphNodeVector.html#open3d.registration.PoseGraphNodeVector" title="open3d.registration.PoseGraphNodeVector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PoseGraphNodeVector</span></code></a></p></td>
+<td><p>Vector of PoseGraphNode</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="open3d.registration.RANSACConvergenceCriteria.html#open3d.registration.RANSACConvergenceCriteria" title="open3d.registration.RANSACConvergenceCriteria"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RANSACConvergenceCriteria</span></code></a></p></td>
+<td><p>Class that defines the convergence criteria of RANSAC.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="open3d.registration.RegistrationResult.html#open3d.registration.RegistrationResult" title="open3d.registration.RegistrationResult"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RegistrationResult</span></code></a></p></td>
+<td><p>Class that contains the registration results.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="open3d.registration.TransformationEstimation.html#open3d.registration.TransformationEstimation" title="open3d.registration.TransformationEstimation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TransformationEstimation</span></code></a></p></td>
+<td><p>Base class that estimates a transformation between two point clouds.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="open3d.registration.TransformationEstimationPointToPlane.html#open3d.registration.TransformationEstimationPointToPlane" title="open3d.registration.TransformationEstimationPointToPlane"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TransformationEstimationPointToPlane</span></code></a></p></td>
+<td><p>Class to estimate a transformation for point to plane distance.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="open3d.registration.TransformationEstimationPointToPoint.html#open3d.registration.TransformationEstimationPointToPoint" title="open3d.registration.TransformationEstimationPointToPoint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TransformationEstimationPointToPoint</span></code></a></p></td>
+<td><p>Class to estimate a transformation for point to point distance.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="open3d.registration.compute_fpfh_feature.html#open3d.registration.compute_fpfh_feature" title="open3d.registration.compute_fpfh_feature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_fpfh_feature</span></code></a>(input, search_param)</p></td>
+<td><p>Function to compute FPFH feature for a point cloud</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="open3d.registration.evaluate_registration.html#open3d.registration.evaluate_registration" title="open3d.registration.evaluate_registration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate_registration</span></code></a>(source, target, …[, …])</p></td>
+<td><p>Function for evaluating registration between point clouds</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="open3d.registration.get_information_matrix_from_point_clouds.html#open3d.registration.get_information_matrix_from_point_clouds" title="open3d.registration.get_information_matrix_from_point_clouds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_information_matrix_from_point_clouds</span></code></a>(…)</p></td>
+<td><p>Function for computing information matrix from transformation matrix</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="open3d.registration.global_optimization.html#open3d.registration.global_optimization" title="open3d.registration.global_optimization"><code class="xref py py-obj docutils literal notranslate"><span class="pre">global_optimization</span></code></a>(pose_graph, method, …)</p></td>
+<td><p>Function to optimize registration.PoseGraph</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="open3d.registration.registration_colored_icp.html#open3d.registration.registration_colored_icp" title="open3d.registration.registration_colored_icp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">registration_colored_icp</span></code></a>(source, target, …)</p></td>
+<td><p>Function for Colored ICP registration</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="open3d.registration.registration_fast_based_on_feature_matching.html#open3d.registration.registration_fast_based_on_feature_matching" title="open3d.registration.registration_fast_based_on_feature_matching"><code class="xref py py-obj docutils literal notranslate"><span class="pre">registration_fast_based_on_feature_matching</span></code></a>(…)</p></td>
+<td><p>Function for fast global registration based on feature matching</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="open3d.registration.registration_icp.html#open3d.registration.registration_icp" title="open3d.registration.registration_icp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">registration_icp</span></code></a>(source, target, …[, …])</p></td>
+<td><p>Function for ICP registration</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="open3d.registration.registration_ransac_based_on_correspondence.html#open3d.registration.registration_ransac_based_on_correspondence" title="open3d.registration.registration_ransac_based_on_correspondence"><code class="xref py py-obj docutils literal notranslate"><span class="pre">registration_ransac_based_on_correspondence</span></code></a>(…)</p></td>
+<td><p>Function for global RANSAC registration based on a set of correspondences</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="open3d.registration.registration_ransac_based_on_feature_matching.html#open3d.registration.registration_ransac_based_on_feature_matching" title="open3d.registration.registration_ransac_based_on_feature_matching"><code class="xref py py-obj docutils literal notranslate"><span class="pre">registration_ransac_based_on_feature_matching</span></code></a>(…)</p></td>
+<td><p>Function for global RANSAC registration based on feature matching</p></td>
+</tr>
+</tbody>
+</table>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="open3d.registration.CorrespondenceChecker.html" class="btn btn-neutral float-right" title="open3d.registration.CorrespondenceChecker" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="open3d.odometry.compute_rgbd_odometry.html" class="btn btn-neutral float-left" title="open3d.odometry.compute_rgbd_odometry" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018 - 2019, www.open3d.org
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+<span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Docs version</span>
+    latest (cf20af6)
+    <span class="fa fa-caret-down"></span>
+</span>
+
+<!-- A hack to include an external page to get around CORS policy -->
+<!-- https://stackoverflow.com/a/15250208/1255535 -->
+<div class="rst-other-versions">
+    <dl>
+    <dt>Versions</dt>
+        <dd><ul>
+            <script src="http://www.open3d.org/docs/versions.js"></script>
+        </ul></dd>
+    </dl>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

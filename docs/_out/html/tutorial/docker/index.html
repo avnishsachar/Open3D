@@ -1,0 +1,458 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Docker &mdash; Open3D latest (cf20af6) documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/open3d_logo.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Docker GUI" href="docker-gui.html" />
+    <link rel="prev" title="C++ interface" href="../C++/cplusplus_interface.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Open3D
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest (cf20af6)
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">About Open3D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../compilation.html">Compiling from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../builddocs.html">Building Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute.html">Contributing to Open3D</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorial</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Basic/index.html">Basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Advanced/index.html">Advanced</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ReconstructionSystem/index.html">Reconstruction system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../C++/cplusplus_interface.html">C++ interface</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Docker</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="docker-gui.html">Docker GUI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker-test.html">Docker test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ubuntu-installation">Ubuntu installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#proxy-settings">Proxy settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#docker-daemon">Docker daemon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#docker-container">Docker container</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dns-servers">DNS servers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.camera.html">open3d.camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.color_map.html">open3d.color_map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.geometry.html">open3d.geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.io.html">open3d.io</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.integration.html">open3d.integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.odometry.html">open3d.odometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.registration.html">open3d.registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.utility.html">open3d.utility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.visualization.html">open3d.visualization</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Open3D</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Docker</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="docker">
+<span id="id1"></span><h1>Docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h1>
+<p>The following document briefly describes:</p>
+<ul class="simple">
+<li><p>the installation of Docker CE</p></li>
+<li><p>a solution for utilizing Open3D with GUI/visualization under Docker</p></li>
+<li><p>the use of Docker images for testing Open3D without a GUI</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="docker-gui.html">Docker GUI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="docker-gui.html#usage-notes">Usage notes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="docker-gui.html#docker-files">Docker files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docker-gui.html#remote-access">Remote access</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docker-gui.html#running-at-the-host-terminal">Running at the host terminal</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="docker-gui.html#limitations">Limitations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="docker-test.html">Docker test</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="docker-test.html#usage-notes">Usage notes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="docker-test.html#setup-files">Setup files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docker-test.html#tools">Tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="ubuntu-installation">
+<span id="docker-installation"></span><h2>Ubuntu installation<a class="headerlink" href="#ubuntu-installation" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>For the latest and most accurate installation guide see the official documentation at <a class="reference external" href="https://docs.docker.com/install/">Docker-CE install</a>.</p>
+</div>
+<p>The prefered installation mode is to use the official <a class="reference external" href="https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-repository">Docker repository</a>.</p>
+<p>Install dependencies:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ sudo apt update <span class="o">&amp;&amp;</span> <span class="se">\</span>
+  sudo apt upgrade -y <span class="o">&amp;&amp;</span> <span class="se">\</span>
+  sudo apt install -y <span class="se">\</span>
+       curl <span class="se">\</span>
+       apt-transport-https <span class="se">\</span>
+       ca-certificates <span class="se">\</span>
+       software-properties-common
+</pre></div>
+</div>
+<p>Add Docker’s official GPG key:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg <span class="p">|</span> sudo apt-key add -
+</pre></div>
+</div>
+<p>Manually verify that the key is <code class="docutils literal notranslate"><span class="pre">9DC8</span> <span class="pre">5822</span> <span class="pre">9FC7</span> <span class="pre">DD38</span> <span class="pre">854A</span> <span class="pre">E2D8</span> <span class="pre">8D81</span> <span class="pre">803C</span> <span class="pre">0EBF</span> <span class="pre">CD88</span></code>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ sudo apt-key fingerprint 0EBFCD88
+</pre></div>
+</div>
+<p>Set up the stable repository:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ sudo add-apt-repository <span class="se">\</span>
+    <span class="s2">&quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu \</span>
+<span class="s2">    </span><span class="k">$(</span>lsb_release -cs<span class="k">)</span><span class="s2"> \</span>
+<span class="s2">    stable&quot;</span>
+
+$ sudo apt update
+</pre></div>
+</div>
+<p>Install the latest version:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ sudo apt install -y docker-ce
+</pre></div>
+</div>
+<p>Verify the installation:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ sudo docker run hello-world
+</pre></div>
+</div>
+<p>The verification will timeout if running behind a proxy:
+<code class="docutils literal notranslate"><span class="pre">Unable</span> <span class="pre">to</span> <span class="pre">find</span> <span class="pre">image</span> <span class="pre">'hello-world:latest'</span> <span class="pre">locally</span></code></p>
+<p>In order to address this problem see the <a class="reference internal" href="#docker-proxy-settings-daemon"><span class="std std-ref">Docker daemon</span></a> proxy settings.</p>
+<p><strong>Optional steps</strong></p>
+<p><a class="reference external" href="https://docs.docker.com/install/linux/linux-postinstall">Docker Post-installation steps for Linux</a></p>
+<p><strong>Add user to “docker” group</strong></p>
+<p>This will eliminate the need to use sudo in order to run docker commands.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ sudo usermod -aG docker &lt;user_name&gt;
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<div class="line-block">
+<div class="line">The docker group grants privileges equivalent to the root user.</div>
+<div class="line">For details on how this impacts security in your system, see <a class="reference external" href="https://docs.docker.com/engine/security/security/#docker-daemon-attack-surface">Docker Daemon Attack Surface</a>.</div>
+</div>
+</div>
+</div>
+<div class="section" id="proxy-settings">
+<span id="docker-proxy-settings"></span><h2>Proxy settings<a class="headerlink" href="#proxy-settings" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="docker-daemon">
+<span id="docker-proxy-settings-daemon"></span><h3>Docker daemon<a class="headerlink" href="#docker-daemon" title="Permalink to this headline">¶</a></h3>
+<p>In order to solve the hello-world issue above follow the <a class="reference external" href="https://docs.docker.com/config/daemon/systemd/#httphttps-proxy">Docker proxy settings</a>.</p>
+<p>Create a systemd drop-in directory for the docker service:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ sudo mkdir -p /etc/systemd/system/docker.service.d
+
+$ sudo touch /etc/systemd/system/docker.service.d/http-proxy.conf
+$ sudo ne /etc/systemd/system/docker.service.d/http-proxy.conf
+<span class="o">[</span>Service<span class="o">]</span>
+<span class="nv">Environment</span><span class="o">=</span><span class="s2">&quot;HTTP_PROXY=server:port&quot;</span> <span class="s2">&quot;NO_PROXY=localhost;127.0.0.1&quot;</span>
+
+$ sudo touch /etc/systemd/system/docker.service.d/https-proxy.conf
+$ sudo ne /etc/systemd/system/docker.service.d/https-proxy.conf
+<span class="o">[</span>Service<span class="o">]</span>
+<span class="nv">Environment</span><span class="o">=</span><span class="s2">&quot;HTTPS_PROXY=server:port/&quot;</span> <span class="s2">&quot;NO_PROXY=localhost;127.0.0.1&quot;</span>
+</pre></div>
+</div>
+<p>Flush changes and restart Docker:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ sudo systemctl daemon-reload
+$ sudo systemctl restart docker
+</pre></div>
+</div>
+<p>Verify that the configuration has been loaded:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ systemctl show --property<span class="o">=</span>Environment docker
+</pre></div>
+</div>
+</div>
+<div class="section" id="docker-container">
+<span id="docker-proxy-settings-container"></span><h3>Docker container<a class="headerlink" href="#docker-container" title="Permalink to this headline">¶</a></h3>
+<p>The docker container proxy settings must be set in order to enable features like <cite>apt install</cite> in your container.
+This can be accomplished either in the Dockerfile itself or by using a global mechanism like <cite>chameleonsocks</cite>.</p>
+<p><strong>Dockerfile</strong></p>
+<p>Take a look at the first few lines of the example <a class="reference download internal" download="" href="../../_downloads/492af41798a5ee4f6f936e530cf1db8a/Dockerfile"><code class="xref download docutils literal notranslate"><span class="pre">Dockerfile</span></code></a>:</p>
+<div class="highlight-docker notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c"># ENV http_proxy  &quot;&quot;</span>
+<span class="c"># ENV HTTP_PROXY  &quot;&quot;</span>
+<span class="c"># ENV https_proxy &quot;&quot;</span>
+<span class="c"># ENV HTTPS_PROXY &quot;&quot;</span>
+<span class="c"># ENV ftp_proxy   &quot;&quot;</span>
+<span class="c"># ENV socks_proxy &quot;&quot;</span>
+<span class="c"># ENV no_proxy    &quot;&quot;</span>
+<span class="c"># ENV ALL_PROXY   &quot;&quot;</span>
+</pre></div>
+</td></tr></table></div>
+<p>Uncommenting and settings these environment variables does the job.</p>
+<p><strong>chameleonsocks</strong></p>
+<p>Another way to set the proxy settings of the container is to use <a class="reference external" href="https://github.com/crops/chameleonsocks">chameleonsocks</a> which is a mechanism to redirect SOCKS or HTTP proxies.</p>
+<p><cite>chameleonsocks</cite> has the advantage that the Dockerfile doesn’t need changing based on network configuration circumstances.
+However it can conflict with other proxy settings on your host system. When that happens stopping the <cite>chameleonsocks</cite> container addresses the conflicts.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ~
+$ mkdir chameleonsocks
+$ <span class="nb">cd</span> chameleonsocks
+$ <span class="nv">https_proxy</span><span class="o">=</span>&lt;https://server:port <span class="se">\</span>
+  wget https://raw.githubusercontent.com/crops/chameleonsocks/master/chameleonsocks.sh <span class="o">&amp;&amp;</span> <span class="se">\</span>
+  chmod <span class="m">755</span> chameleonsocks.sh
+</pre></div>
+</div>
+<p>In order to properly set the proxy settings edit the proxy settings inside the <cite>chameleonsocks.sh</cite> file:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># This is the domain name or ip address of your proxy server. It must</span>
+<span class="c1"># be defined or nothing will work. Do not specify a protocol type</span>
+<span class="c1"># such as http:// or https://.</span>
+: <span class="si">${</span><span class="nv">PROXY</span><span class="p">:=server</span><span class="si">}</span>
+<span class="c1"># This is the port number of your proxy server</span>
+: <span class="si">${</span><span class="nv">PORT</span><span class="p">:=port</span><span class="si">}</span>
+<span class="c1"># Possible PROXY_TYPE values: socks4, socks5, http-connect, http-relay</span>
+: <span class="si">${</span><span class="nv">PROXY_TYPE</span><span class="p">:=socks5</span><span class="si">}</span>
+<span class="c1"># a file containing local company specific exceptions</span>
+: <span class="si">${</span><span class="nv">EXCEPTIONS</span><span class="p">:=chameleon.exceptions</span><span class="si">}</span>
+<span class="c1"># Autoproxy url, this is often something like</span>
+<span class="c1"># http://autoproxy.server.com or http://wpad.server.com/wpad.out</span>
+<span class="c1"># ONLY additional exceptions are pulled from here. not the proxy</span>
+: <span class="si">${</span><span class="nv">PAC_URL</span><span class="p">=http://wpad.server.com/wpad.dat</span><span class="si">}</span>
+</pre></div>
+</div>
+<p>Create the <cite>chameleon.exceptions</cite> file:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ touch chameleon.exceptions
+$ ne chameleon.exceptions
+
+server.com
+.server.com
+localhost
+<span class="m">127</span>.0.0.1
+</pre></div>
+</div>
+<p>Install <cite>chameleonsocks</cite>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ ./chameleonsocks.sh --install
+</pre></div>
+</div>
+<p>NOTE: the <cite>chameleonsocks.exceptions</cite> file disappears after the install step above.</p>
+</div>
+<div class="section" id="dns-servers">
+<h3>DNS servers<a class="headerlink" href="#dns-servers" title="Permalink to this headline">¶</a></h3>
+<p>In order to specify <a class="reference external" href="https://docs.docker.com/install/linux/linux-postinstall/#specify-dns-servers-for-docker">DNS servers for docker</a>
+edit <code class="docutils literal notranslate"><span class="pre">/etc/docker/daemon.json</span></code> on the host:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ sudo ne /etc/docker/daemon.json
+<span class="o">{</span>
+    <span class="s2">&quot;dns&quot;</span>: <span class="o">[</span><span class="s2">&quot;xxx.xxx.xxx.xxx&quot;</span>, <span class="s2">&quot;xxx.xxx.xxx.xxx&quot;</span><span class="o">]</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="docker-gui.html" class="btn btn-neutral float-right" title="Docker GUI" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../C++/cplusplus_interface.html" class="btn btn-neutral float-left" title="C++ interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018 - 2019, www.open3d.org
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+<span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Docs version</span>
+    latest (cf20af6)
+    <span class="fa fa-caret-down"></span>
+</span>
+
+<!-- A hack to include an external page to get around CORS policy -->
+<!-- https://stackoverflow.com/a/15250208/1255535 -->
+<div class="rst-other-versions">
+    <dl>
+    <dt>Versions</dt>
+        <dd><ul>
+            <script src="http://www.open3d.org/docs/versions.js"></script>
+        </ul></dd>
+    </dl>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

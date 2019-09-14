@@ -1,0 +1,2 @@
+/home/avnishsachar/Open3D/examples/Python/CMakeFiles/edit_cache.dir
+/home/avnishsachar/Open3D/examples/Python/CMakeFiles/rebuild_cache.dir

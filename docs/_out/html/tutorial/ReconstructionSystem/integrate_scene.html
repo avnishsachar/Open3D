@@ -1,0 +1,370 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Integrate scene &mdash; Open3D latest (cf20af6) documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/open3d_logo.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Capture your own dataset" href="capture_your_own_dataset.html" />
+    <link rel="prev" title="Refine registration" href="refine_registration.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Open3D
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest (cf20af6)
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">About Open3D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../compilation.html">Compiling from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../builddocs.html">Building Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute.html">Contributing to Open3D</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorial</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Basic/index.html">Basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Advanced/index.html">Advanced</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reconstruction system</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="system_overview.html">System overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="make_fragments.html">Make fragments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="register_fragments.html">Register fragments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="refine_registration.html">Refine registration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Integrate scene</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#input-arguments">Input arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#integrate-rgbd-frames">Integrate RGBD frames</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#results">Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="capture_your_own_dataset.html">Capture your own dataset</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../C++/cplusplus_interface.html">C++ interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docker/index.html">Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.camera.html">open3d.camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.color_map.html">open3d.color_map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.geometry.html">open3d.geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.io.html">open3d.io</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.integration.html">open3d.integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.odometry.html">open3d.odometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.registration.html">open3d.registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.utility.html">open3d.utility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.visualization.html">open3d.visualization</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Open3D</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Reconstruction system</a> &raquo;</li>
+        
+      <li>Integrate scene</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="integrate-scene">
+<span id="reconstruction-system-integrate-scene"></span><h1>Integrate scene<a class="headerlink" href="#integrate-scene" title="Permalink to this headline">¶</a></h1>
+<p>The final step of the system is to integrate all RGBD images into a single TSDF volume and extract a mesh as the result.</p>
+<div class="section" id="input-arguments">
+<h2>Input arguments<a class="headerlink" href="#input-arguments" title="Permalink to this headline">¶</a></h2>
+<p>The script runs with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">run_system.py</span> <span class="pre">[config]</span> <span class="pre">--integrate</span></code>. In <code class="docutils literal notranslate"><span class="pre">[config]</span></code>, <code class="docutils literal notranslate"><span class="pre">[&quot;path_dataset&quot;]</span></code> should have subfolders <em>image</em> and <em>depth</em> in which frames are synchronized and aligned. In <code class="docutils literal notranslate"><span class="pre">[config]</span></code>, the optional argument <code class="docutils literal notranslate"><span class="pre">[&quot;path_intrinsic&quot;]</span></code> specifies path to a json file that has a camera intrinsic matrix (See <a class="reference internal" href="../Basic/rgbd_odometry.html#reading-camera-intrinsic"><span class="std std-ref">Read camera intrinsic</span></a> for details). If it is not given, the PrimeSense factory setting is used instead.</p>
+</div>
+<div class="section" id="integrate-rgbd-frames">
+<h2>Integrate RGBD frames<a class="headerlink" href="#integrate-rgbd-frames" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># examples/Python/ReconstructionSystem/integrate_scene.py</span>
+<span class="k">def</span> <span class="nf">scalable_integrate_rgb_frames</span><span class="p">(</span><span class="n">path_dataset</span><span class="p">,</span> <span class="n">intrinsic</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+    <span class="n">poses</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="p">[</span><span class="n">color_files</span><span class="p">,</span> <span class="n">depth_files</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_rgbd_file_lists</span><span class="p">(</span><span class="n">path_dataset</span><span class="p">)</span>
+    <span class="n">n_files</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">color_files</span><span class="p">)</span>
+    <span class="n">n_fragments</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">n_files</span><span class="p">)</span> <span class="o">/</span> \
+            <span class="n">config</span><span class="p">[</span><span class="s1">&#39;n_frames_per_fragment&#39;</span><span class="p">]))</span>
+    <span class="n">volume</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">integration</span><span class="o">.</span><span class="n">ScalableTSDFVolume</span><span class="p">(</span>
+        <span class="n">voxel_length</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;tsdf_cubic_size&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mf">512.0</span><span class="p">,</span>
+        <span class="n">sdf_trunc</span><span class="o">=</span><span class="mf">0.04</span><span class="p">,</span>
+        <span class="n">color_type</span><span class="o">=</span><span class="n">o3d</span><span class="o">.</span><span class="n">integration</span><span class="o">.</span><span class="n">TSDFVolumeColorType</span><span class="o">.</span><span class="n">RGB8</span><span class="p">)</span>
+
+    <span class="n">pose_graph_fragment</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_pose_graph</span><span class="p">(</span>
+        <span class="n">join</span><span class="p">(</span><span class="n">path_dataset</span><span class="p">,</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;template_refined_posegraph_optimized&quot;</span><span class="p">]))</span>
+
+    <span class="k">for</span> <span class="n">fragment_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pose_graph_fragment</span><span class="o">.</span><span class="n">nodes</span><span class="p">)):</span>
+        <span class="n">pose_graph_rgbd</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_pose_graph</span><span class="p">(</span>
+            <span class="n">join</span><span class="p">(</span><span class="n">path_dataset</span><span class="p">,</span>
+                 <span class="n">config</span><span class="p">[</span><span class="s2">&quot;template_fragment_posegraph_optimized&quot;</span><span class="p">]</span> <span class="o">%</span> <span class="n">fragment_id</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">frame_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pose_graph_rgbd</span><span class="o">.</span><span class="n">nodes</span><span class="p">)):</span>
+            <span class="n">frame_id_abs</span> <span class="o">=</span> <span class="n">fragment_id</span> <span class="o">*</span> \
+                    <span class="n">config</span><span class="p">[</span><span class="s1">&#39;n_frames_per_fragment&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">frame_id</span>
+            <span class="k">print</span><span class="p">(</span>
+                <span class="s2">&quot;Fragment </span><span class="si">%03d</span><span class="s2"> / </span><span class="si">%03d</span><span class="s2"> :: integrate rgbd frame </span><span class="si">%d</span><span class="s2"> (</span><span class="si">%d</span><span class="s2"> of </span><span class="si">%d</span><span class="s2">).&quot;</span> <span class="o">%</span>
+                <span class="p">(</span><span class="n">fragment_id</span><span class="p">,</span> <span class="n">n_fragments</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">frame_id_abs</span><span class="p">,</span> <span class="n">frame_id</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                 <span class="nb">len</span><span class="p">(</span><span class="n">pose_graph_rgbd</span><span class="o">.</span><span class="n">nodes</span><span class="p">)))</span>
+            <span class="n">rgbd</span> <span class="o">=</span> <span class="n">read_rgbd_image</span><span class="p">(</span><span class="n">color_files</span><span class="p">[</span><span class="n">frame_id_abs</span><span class="p">],</span>
+                                   <span class="n">depth_files</span><span class="p">[</span><span class="n">frame_id_abs</span><span class="p">],</span> <span class="bp">False</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+            <span class="n">pose</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">pose_graph_fragment</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">fragment_id</span><span class="p">]</span><span class="o">.</span><span class="n">pose</span><span class="p">,</span>
+                          <span class="n">pose_graph_rgbd</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">frame_id</span><span class="p">]</span><span class="o">.</span><span class="n">pose</span><span class="p">)</span>
+            <span class="n">volume</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">rgbd</span><span class="p">,</span> <span class="n">intrinsic</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">pose</span><span class="p">))</span>
+            <span class="n">poses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>
+
+    <span class="n">mesh</span> <span class="o">=</span> <span class="n">volume</span><span class="o">.</span><span class="n">extract_triangle_mesh</span><span class="p">()</span>
+    <span class="n">mesh</span><span class="o">.</span><span class="n">compute_vertex_normals</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;debug_mode&quot;</span><span class="p">]:</span>
+        <span class="n">o3d</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">draw_geometries</span><span class="p">([</span><span class="n">mesh</span><span class="p">])</span>
+
+</pre></div>
+</td></tr></table></div>
+<p>This function first reads the alignment results from both <a class="reference internal" href="make_fragments.html#reconstruction-system-make-fragments"><span class="std std-ref">Make fragments</span></a> and <a class="reference internal" href="register_fragments.html#reconstruction-system-register-fragments"><span class="std std-ref">Register fragments</span></a>, then computes the pose of each RGBD image in the global space. After that, RGBD images are integrated using <a class="reference internal" href="../Advanced/rgbd_integration.html#rgbd-integration"><span class="std std-ref">RGBD integration</span></a>.</p>
+</div>
+<div class="section" id="results">
+<h2>Results<a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h2>
+<p>This is a printed log from the volume integration script.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>Fragment <span class="m">000</span> / <span class="m">013</span> :: integrate rgbd frame <span class="m">0</span> <span class="o">(</span><span class="m">1</span> of <span class="m">100</span><span class="o">)</span>.
+Fragment <span class="m">000</span> / <span class="m">013</span> :: integrate rgbd frame <span class="m">1</span> <span class="o">(</span><span class="m">2</span> of <span class="m">100</span><span class="o">)</span>.
+Fragment <span class="m">000</span> / <span class="m">013</span> :: integrate rgbd frame <span class="m">2</span> <span class="o">(</span><span class="m">3</span> of <span class="m">100</span><span class="o">)</span>.
+Fragment <span class="m">000</span> / <span class="m">013</span> :: integrate rgbd frame <span class="m">3</span> <span class="o">(</span><span class="m">4</span> of <span class="m">100</span><span class="o">)</span>.
+:
+Fragment <span class="m">013</span> / <span class="m">013</span> :: integrate rgbd frame <span class="m">1360</span> <span class="o">(</span><span class="m">61</span> of <span class="m">64</span><span class="o">)</span>.
+Fragment <span class="m">013</span> / <span class="m">013</span> :: integrate rgbd frame <span class="m">1361</span> <span class="o">(</span><span class="m">62</span> of <span class="m">64</span><span class="o">)</span>.
+Fragment <span class="m">013</span> / <span class="m">013</span> :: integrate rgbd frame <span class="m">1362</span> <span class="o">(</span><span class="m">63</span> of <span class="m">64</span><span class="o">)</span>.
+Fragment <span class="m">013</span> / <span class="m">013</span> :: integrate rgbd frame <span class="m">1363</span> <span class="o">(</span><span class="m">64</span> of <span class="m">64</span><span class="o">)</span>.
+Writing PLY: <span class="o">[========================================]</span> <span class="m">100</span>%
+</pre></div>
+</div>
+<p>The following images show final scene reconstruction.</p>
+<a class="reference internal image-reference" href="../../_images/scene1.png"><img alt="../../_images/scene1.png" src="../../_images/scene1.png" style="width: 500px;" /></a>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="capture_your_own_dataset.html" class="btn btn-neutral float-right" title="Capture your own dataset" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="refine_registration.html" class="btn btn-neutral float-left" title="Refine registration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018 - 2019, www.open3d.org
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+<span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Docs version</span>
+    latest (cf20af6)
+    <span class="fa fa-caret-down"></span>
+</span>
+
+<!-- A hack to include an external page to get around CORS policy -->
+<!-- https://stackoverflow.com/a/15250208/1255535 -->
+<div class="rst-other-versions">
+    <dl>
+    <dt>Versions</dt>
+        <dd><ul>
+            <script src="http://www.open3d.org/docs/versions.js"></script>
+        </ul></dd>
+    </dl>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

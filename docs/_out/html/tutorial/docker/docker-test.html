@@ -1,0 +1,349 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Docker test &mdash; Open3D latest (cf20af6) documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/open3d_logo.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Reference" href="../reference.html" />
+    <link rel="prev" title="Docker GUI" href="docker-gui.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Open3D
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest (cf20af6)
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">About Open3D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../compilation.html">Compiling from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../builddocs.html">Building Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute.html">Contributing to Open3D</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorial</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Basic/index.html">Basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Advanced/index.html">Advanced</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ReconstructionSystem/index.html">Reconstruction system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../C++/cplusplus_interface.html">C++ interface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Docker</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="docker-gui.html">Docker GUI</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Docker test</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#usage-notes">Usage notes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#setup-files">Setup files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tools">Tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#ubuntu-installation">Ubuntu installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#proxy-settings">Proxy settings</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.camera.html">open3d.camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.color_map.html">open3d.color_map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.geometry.html">open3d.geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.io.html">open3d.io</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.integration.html">open3d.integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.odometry.html">open3d.odometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.registration.html">open3d.registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.utility.html">open3d.utility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.visualization.html">open3d.visualization</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Open3D</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Docker</a> &raquo;</li>
+        
+      <li>Docker test</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="docker-test">
+<span id="id1"></span><h1>Docker test<a class="headerlink" href="#docker-test" title="Permalink to this headline">¶</a></h1>
+<p>A number of Docker images have been designed for the purpose of testing Open3D.
+These configurations are based on various Ubuntu versions, Python installations
+and number of preinstalled Open3D dependencies and don’t support a GUI.</p>
+<p>Ubuntu:</p>
+<ul class="simple">
+<li><p>14.04</p></li>
+<li><p>16.04</p></li>
+<li><p>18.04</p></li>
+</ul>
+<p>Python installations:</p>
+<ul class="simple">
+<li><p>py2: python2.x</p></li>
+<li><p>py3: python3.x</p></li>
+<li><p>mc2: miniconda2</p></li>
+<li><p>mc3: miniconda3</p></li>
+</ul>
+<p>Preinstalled dependencies (bundle type):</p>
+<ul class="simple">
+<li><p>base: minimal, dependencies will be built from source</p></li>
+<li><p>deps: all dependencies are installed from packages</p></li>
+</ul>
+<p>The Python version will differ from one image to another based on the defaults for that configuration.</p>
+<p>The images can be found at: <a class="reference external" href="https://hub.docker.com/r/intelvcl/open3d-test">intelvcl/open3d-test</a></p>
+<div class="section" id="usage-notes">
+<span id="docker-test-usage-notes"></span><h2>Usage notes<a class="headerlink" href="#usage-notes" title="Permalink to this headline">¶</a></h2>
+<p>The docker setup files and tools can be found under: <a class="reference external" href="https://github.com/intel-isl/Open3D/tree/docker/util/docker/open3d-test">Open3d/util/docker/open3d-test</a>.</p>
+<div class="section" id="setup-files">
+<span id="docker-test-setup"></span><h3>Setup files<a class="headerlink" href="#setup-files" title="Permalink to this headline">¶</a></h3>
+<p>The setup files are used, along with the dockerfiles, to build the images.</p>
+</div>
+<div class="section" id="tools">
+<span id="docker-test-tools"></span><h3>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">¶</a></h3>
+<p>The tools are scripts designed to:</p>
+<ul class="simple">
+<li><p>build the docker images</p></li>
+<li><p>upload the images to the online repository</p></li>
+<li><p>test Open3D</p></li>
+<li><p>delete the images from the system</p></li>
+<li><p>stop running containers</p></li>
+</ul>
+<p>Most scripts, with the exception of those that are meant for all
+configurations, accept the following arguments:</p>
+<ul class="simple">
+<li><p>Ubuntu version:   14.04 16.04 18.04</p></li>
+<li><p>Bundle type:      base deps</p></li>
+<li><p>Environment type: py2 py3 mc2 mc3</p></li>
+<li><p>Link type:        STATIC SHARED</p></li>
+</ul>
+<p>The first two arguments, the Ubuntu version and the bundle type, are always required.
+The last two arguments, the Python installation (aka environment type) and the library link type are only required by the test.sh script.</p>
+<p>The scripts are designed to display help on the arguments if an error is detected.</p>
+<p><strong>build.sh</strong></p>
+<p>This script will build a single Open3D docker image based on the Ubuntu version, bundle type and Python version.</p>
+<p><strong>build-all.sh</strong></p>
+<p>This script will build all of the supported Open3D docker images.</p>
+<p><strong>upload.sh</strong></p>
+<p>This script will upload a single Open3D docker image. Accepts the same command line arguments as build.sh.</p>
+<p>Requires docker login:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ docker login --username intelvcl
+</pre></div>
+</div>
+<p><strong>upload-all.sh</strong></p>
+<p>This script will upload all of the Open3D docker images.</p>
+<p>Requires docker login:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ docker login --username intelvcl
+</pre></div>
+</div>
+<p><strong>cleanup.sh</strong></p>
+<p>This script will remove all of the Open3D docker images, if any is found on the system.</p>
+<p><strong>prune.sh</strong></p>
+<p>This script is useful at design time and helps remove any unfinished docker images.</p>
+<p><strong>test.sh</strong></p>
+<p>This script tests a single Open3D configuration.
+Requires all four command line arguments.</p>
+<p><strong>test-all.sh</strong></p>
+<p>This script tests all Open3D test configurations.</p>
+<p><strong>run.sh</strong></p>
+<p>This script is useful for interacting with Open3D under a specific configuration.
+Accepts the same command line arguments as build.sh.</p>
+<p><strong>stop.sh</strong></p>
+<p>This script stops a single Open3D container.</p>
+<p><strong>stop-all.sh</strong></p>
+<p>This script stops all, if any was found, Open3D containers.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../reference.html" class="btn btn-neutral float-right" title="Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="docker-gui.html" class="btn btn-neutral float-left" title="Docker GUI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018 - 2019, www.open3d.org
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+<span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Docs version</span>
+    latest (cf20af6)
+    <span class="fa fa-caret-down"></span>
+</span>
+
+<!-- A hack to include an external page to get around CORS policy -->
+<!-- https://stackoverflow.com/a/15250208/1255535 -->
+<div class="rst-other-versions">
+    <dl>
+    <dt>Versions</dt>
+        <dd><ul>
+            <script src="http://www.open3d.org/docs/versions.js"></script>
+        </ul></dd>
+    </dl>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

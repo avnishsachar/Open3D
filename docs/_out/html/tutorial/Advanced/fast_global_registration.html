@@ -1,0 +1,431 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Fast global registration &mdash; Open3D latest (cf20af6) documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/open3d_logo.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Multiway registration" href="multiway_registration.html" />
+    <link rel="prev" title="Global registration" href="global_registration.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Open3D
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest (cf20af6)
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">About Open3D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../compilation.html">Compiling from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../builddocs.html">Building Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute.html">Contributing to Open3D</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorial</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Basic/index.html">Basic</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Advanced</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="pointcloud_outlier_removal.html">Point cloud outlier removal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="colored_pointcloud_registration.html">Colored point cloud registration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="global_registration.html">Global registration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Fast global registration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#input">Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#baseline">Baseline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Fast global registration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="multiway_registration.html">Multiway registration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rgbd_integration.html">RGBD integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="color_map_optimization.html">Color Map Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="customized_visualization.html">Customized visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="non_blocking_visualization.html">Non-blocking visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive_visualization.html">Interactive visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="headless_rendering.html">Headless rendering</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ReconstructionSystem/index.html">Reconstruction system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../C++/cplusplus_interface.html">C++ interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docker/index.html">Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.camera.html">open3d.camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.color_map.html">open3d.color_map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.geometry.html">open3d.geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.io.html">open3d.io</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.integration.html">open3d.integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.odometry.html">open3d.odometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.registration.html">open3d.registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.utility.html">open3d.utility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/open3d.visualization.html">open3d.visualization</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Open3D</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Advanced</a> &raquo;</li>
+        
+      <li>Fast global registration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="fast-global-registration">
+<span id="id1"></span><h1>Fast global registration<a class="headerlink" href="#fast-global-registration" title="Permalink to this headline">¶</a></h1>
+<p>The RANSAC based <a class="reference internal" href="global_registration.html#global-registration"><span class="std std-ref">Global registration</span></a> solution may take a long time due to countless model proposals and evaluations.
+<a class="reference internal" href="../reference.html#zhou2016" id="id2"><span>[Zhou2016]</span></a> introduced a faster approach that quickly optimizes line process weights of few correspondences.
+As there is no model proposal and evaluation involved for each iteration, the approach proposed in <a class="reference internal" href="../reference.html#zhou2016" id="id3"><span>[Zhou2016]</span></a> can save a lot of computational time.</p>
+<p>This script compares the running time of RANSAC based <a class="reference internal" href="global_registration.html#global-registration"><span class="std std-ref">Global registration</span></a> and implementation of <a class="reference internal" href="../reference.html#zhou2016" id="id4"><span>[Zhou2016]</span></a>.</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># examples/Python/Advanced/fast_global_registration.py</span>
+
+<span class="kn">import</span> <span class="nn">open3d</span> <span class="kn">as</span> <span class="nn">o3d</span>
+<span class="kn">from</span> <span class="nn">global_registration</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+
+<span class="kn">import</span> <span class="nn">time</span>
+
+
+<span class="k">def</span> <span class="nf">execute_fast_global_registration</span><span class="p">(</span><span class="n">source_down</span><span class="p">,</span> <span class="n">target_down</span><span class="p">,</span> <span class="n">source_fpfh</span><span class="p">,</span>
+                                     <span class="n">target_fpfh</span><span class="p">,</span> <span class="n">voxel_size</span><span class="p">):</span>
+    <span class="n">distance_threshold</span> <span class="o">=</span> <span class="n">voxel_size</span> <span class="o">*</span> <span class="mf">0.5</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;:: Apply fast global registration with distance threshold </span><span class="si">%.3f</span><span class="s2">&quot;</span> \
+            <span class="o">%</span> <span class="n">distance_threshold</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">registration_fast_based_on_feature_matching</span><span class="p">(</span>
+        <span class="n">source_down</span><span class="p">,</span> <span class="n">target_down</span><span class="p">,</span> <span class="n">source_fpfh</span><span class="p">,</span> <span class="n">target_fpfh</span><span class="p">,</span>
+        <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">FastGlobalRegistrationOption</span><span class="p">(</span>
+            <span class="n">maximum_correspondence_distance</span><span class="o">=</span><span class="n">distance_threshold</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+
+    <span class="n">voxel_size</span> <span class="o">=</span> <span class="mf">0.05</span>  <span class="c1"># means 5cm for the dataset</span>
+    <span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">source_down</span><span class="p">,</span> <span class="n">target_down</span><span class="p">,</span> <span class="n">source_fpfh</span><span class="p">,</span> <span class="n">target_fpfh</span> <span class="o">=</span> \
+            <span class="n">prepare_dataset</span><span class="p">(</span><span class="n">voxel_size</span><span class="p">)</span>
+
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">result_ransac</span> <span class="o">=</span> <span class="n">execute_global_registration</span><span class="p">(</span><span class="n">source_down</span><span class="p">,</span> <span class="n">target_down</span><span class="p">,</span>
+                                                <span class="n">source_fpfh</span><span class="p">,</span> <span class="n">target_fpfh</span><span class="p">,</span>
+                                                <span class="n">voxel_size</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">result_ransac</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Global registration took </span><span class="si">%.3f</span><span class="s2"> sec.</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
+    <span class="n">draw_registration_result</span><span class="p">(</span><span class="n">source_down</span><span class="p">,</span> <span class="n">target_down</span><span class="p">,</span>
+                             <span class="n">result_ransac</span><span class="o">.</span><span class="n">transformation</span><span class="p">)</span>
+
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">result_fast</span> <span class="o">=</span> <span class="n">execute_fast_global_registration</span><span class="p">(</span><span class="n">source_down</span><span class="p">,</span> <span class="n">target_down</span><span class="p">,</span>
+                                                   <span class="n">source_fpfh</span><span class="p">,</span> <span class="n">target_fpfh</span><span class="p">,</span>
+                                                   <span class="n">voxel_size</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Fast global registration took </span><span class="si">%.3f</span><span class="s2"> sec.</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
+    <span class="n">draw_registration_result</span><span class="p">(</span><span class="n">source_down</span><span class="p">,</span> <span class="n">target_down</span><span class="p">,</span>
+                             <span class="n">result_fast</span><span class="o">.</span><span class="n">transformation</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="input">
+<h2>Input<a class="headerlink" href="#input" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>29
+30
+31</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="n">voxel_size</span> <span class="o">=</span> <span class="mf">0.05</span>  <span class="c1"># means 5cm for the dataset</span>
+    <span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">source_down</span><span class="p">,</span> <span class="n">target_down</span><span class="p">,</span> <span class="n">source_fpfh</span><span class="p">,</span> <span class="n">target_fpfh</span> <span class="o">=</span> \
+            <span class="n">prepare_dataset</span><span class="p">(</span><span class="n">voxel_size</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>For the pair comparison, the script reuses the <code class="docutils literal notranslate"><span class="pre">prepare_dataset</span></code> function defined in <a class="reference internal" href="global_registration.html#global-registration"><span class="std std-ref">Global registration</span></a>.
+It produces a pair of downsampled point clouds as well as FPFH features.</p>
+</div>
+<div class="section" id="baseline">
+<h2>Baseline<a class="headerlink" href="#baseline" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>33
+34
+35
+36
+37
+38
+39
+40</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">result_ransac</span> <span class="o">=</span> <span class="n">execute_global_registration</span><span class="p">(</span><span class="n">source_down</span><span class="p">,</span> <span class="n">target_down</span><span class="p">,</span>
+                                                <span class="n">source_fpfh</span><span class="p">,</span> <span class="n">target_fpfh</span><span class="p">,</span>
+                                                <span class="n">voxel_size</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">result_ransac</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Global registration took </span><span class="si">%.3f</span><span class="s2"> sec.</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
+    <span class="n">draw_registration_result</span><span class="p">(</span><span class="n">source_down</span><span class="p">,</span> <span class="n">target_down</span><span class="p">,</span>
+                             <span class="n">result_ransac</span><span class="o">.</span><span class="n">transformation</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>This script calls RANSAC based <a class="reference internal" href="global_registration.html#global-registration"><span class="std std-ref">Global registration</span></a> as a baseline. After registration it displays the following result.</p>
+<a class="reference internal image-reference" href="../../_images/ransac1.png"><img alt="../../_images/ransac1.png" src="../../_images/ransac1.png" style="width: 400px;" /></a>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>RANSAC based global registration took <span class="m">2</span>.538 sec.
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>Fast global registration<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>With the same input used for a baseline, the next script calls the implementation of <a class="reference internal" href="../reference.html#zhou2016" id="id6"><span>[Zhou2016]</span></a>.</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">execute_fast_global_registration</span><span class="p">(</span><span class="n">source_down</span><span class="p">,</span> <span class="n">target_down</span><span class="p">,</span> <span class="n">source_fpfh</span><span class="p">,</span>
+                                     <span class="n">target_fpfh</span><span class="p">,</span> <span class="n">voxel_size</span><span class="p">):</span>
+    <span class="n">distance_threshold</span> <span class="o">=</span> <span class="n">voxel_size</span> <span class="o">*</span> <span class="mf">0.5</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;:: Apply fast global registration with distance threshold </span><span class="si">%.3f</span><span class="s2">&quot;</span> \
+            <span class="o">%</span> <span class="n">distance_threshold</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">registration_fast_based_on_feature_matching</span><span class="p">(</span>
+        <span class="n">source_down</span><span class="p">,</span> <span class="n">target_down</span><span class="p">,</span> <span class="n">source_fpfh</span><span class="p">,</span> <span class="n">target_fpfh</span><span class="p">,</span>
+        <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">FastGlobalRegistrationOption</span><span class="p">(</span>
+            <span class="n">maximum_correspondence_distance</span><span class="o">=</span><span class="n">distance_threshold</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</td></tr></table></div>
+<p>This script displays the following result.</p>
+<a class="reference internal image-reference" href="../../_images/fgr.png"><img alt="../../_images/fgr.png" src="../../_images/fgr.png" style="width: 400px;" /></a>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>Fast global registration took <span class="m">0</span>.193 sec.
+</pre></div>
+</div>
+<p>With proper configuration, the accuracy of fast global registration is even comparable with ICP.
+Please refer to <a class="reference internal" href="../reference.html#zhou2016" id="id7"><span>[Zhou2016]</span></a> for more experimental results.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="multiway_registration.html" class="btn btn-neutral float-right" title="Multiway registration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="global_registration.html" class="btn btn-neutral float-left" title="Global registration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018 - 2019, www.open3d.org
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+<span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Docs version</span>
+    latest (cf20af6)
+    <span class="fa fa-caret-down"></span>
+</span>
+
+<!-- A hack to include an external page to get around CORS policy -->
+<!-- https://stackoverflow.com/a/15250208/1255535 -->
+<div class="rst-other-versions">
+    <dl>
+    <dt>Versions</dt>
+        <dd><ul>
+            <script src="http://www.open3d.org/docs/versions.js"></script>
+        </ul></dd>
+    </dl>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
